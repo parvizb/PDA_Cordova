@@ -224,7 +224,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Actions> Actionss = new List<Actions>();
         public List<DontBuild> DontBuilds = new List<DontBuild>();
         public List<Notifaction> Notifactions = new List<Notifaction>();
-
+        public List<DataBaseTable> DataBaseTables = new List<DataBaseTable>();
         public void ParseEle(XmlNode node)
         {
 
@@ -286,6 +286,12 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     Actionss.Add(Temp);
                 }
+                if (node.ChildNodes[i].Name == "DataBaseTable")
+                {
+                    DataBaseTable Temp = new DataBaseTable();
+                    Temp.ParseEle(node.ChildNodes[i]);
+                    DataBaseTables.Add(Temp);
+                }
                 if (node.ChildNodes[i].Name == "CopyElements")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
@@ -336,6 +342,14 @@ namespace PDA_Engine_Cordova_Con
 
                         }
                     }
+                    if (xn.Attr("ImportDataBaseTables") == "Yes")
+                    {
+                        for (int k = 0; k < Ap.DataBaseTables.Count; k++)
+                        {
+                            this.DataBaseTables.Add(Ap.DataBaseTables[k]);
+
+                        }
+                    }
                 }
             }
 
@@ -346,6 +360,54 @@ namespace PDA_Engine_Cordova_Con
 
         }
 
+    }
+    public class DataBaseTable:ILiquidizable
+    {
+        public string name;
+        public List<Column> Columns=new List<Column>();
+
+        public void ParseEle(XmlNode T)
+        {
+            name = T.Attr("name");
+            foreach (XmlNode Z in T.ChildNodes)
+            {
+                if (Z.Name == "Column")
+                {
+                    Column Temp = new Column();
+                    Temp.ParseEle(Z);
+                    Columns.Add(Temp);
+
+                }
+            }
+
+
+        }
+
+        public object ToLiquid()
+        {
+            return Hash.FromAnonymousObject(new {name=this.name ,Columns=this.Columns });
+        }
+    }
+    public class Column:ILiquidizable
+    {
+        public string Name;
+        public string Caption;
+        public string DataType;
+        public string isPrimary;
+        public void ParseEle(XmlNode T)
+        {
+            Name = T.Attr("Name");
+            Caption = T.Attr("Caption");
+            DataType = T.Attr("DataType");
+            isPrimary = T.Attr("isPrimary");
+
+
+        }
+
+        public object ToLiquid()
+        {
+            return Hash.FromAnonymousObject(new { Name=this.Name,Caption=this.Caption,DataType=this.DataType,isPrimary=this.isPrimary });
+        }
     }
 
     public class BatchCommand : ILiquidizable

@@ -2402,19 +2402,21 @@ namespace PDA_Engine_Cordova_Con
             string x = "?SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
             string script = "var db = window.openDatabase('" + App.Name + "', 1.0, 'PDB" + App.Name+"', 2*1024*1024);\r\n";
             script+="db.transaction(function (tx) { \r\n  ";
-            DataTable DX= PDAL.ReadRecords(ref x, new List<inputParameter>());
-            for (int a = 0; a < DX.Rows.Count; a++)
+            //DataTable DX= PDAL.ReadRecords(ref x, new List<inputParameter>());
+            for (int a = 0; a < App.DataBaseTables.Count; a++)
             {
-                string xzz = "?" +"select sys.columns.*,(select top(1) name  from sys.types where sys.types.system_type_id=sys.columns.system_type_id) name_type,(select is_primary_key from sys.indexes where sys.indexes.object_id=sys.columns.object_id and index_id=column_id ) is_primary_key from sys.columns,sys.objects where sys.columns.object_id=sys.objects.object_id and sys.objects.name='" + DX.Rows[a][0].ToString() + "' and sys.objects.type='u'";
-                DataTable Dy = PDAL.ReadRecords(ref xzz, new List<inputParameter>());
-                script += " tx.executeSql('CREATE TABLE IF NOT EXISTS [" + DX.Rows[a][0] + "] ( ";
-                for (int b = 0; b < Dy.Rows.Count; b++)
+                DataBaseTable Tx=App.DataBaseTables[a];
+               // string xzz = "?" +"select sys.columns.*,(select top(1) name  from sys.types where sys.types.system_type_id=sys.columns.system_type_id) name_type,(select is_primary_key from sys.indexes where sys.indexes.object_id=sys.columns.object_id and index_id=column_id ) is_primary_key from sys.columns,sys.objects where sys.columns.object_id=sys.objects.object_id and sys.objects.name='" + DX.Rows[a][0].ToString() + "' and sys.objects.type='u'";
+               // DataTable Dy = PDAL.ReadRecords(ref xzz, new List<inputParameter>());
+                script += " tx.executeSql('CREATE TABLE IF NOT EXISTS [" + Tx.name + "] ( ";
+                for (int b = 0; b < Tx.Columns.Count; b++)
                 {
+                    Column C = Tx.Columns[b];
                     if (b != 0)
                     {
                         script += " , ";
                     }
-                    script += Dy.Rows[b]["name"].ToString() + (Dy.Rows[b]["is_identity"].ToString() == "True" ? " INTEGER  " : " ") + (Dy.Rows[b]["is_primary_key"].ToString() == "True" ? " PRIMARY KEY " : " ") + " ";
+                    script +=C.Name  + " " + C.DataType  + (C.isPrimary  == "Yes" ? " PRIMARY KEY " : " ") + " ";
 
                 }
                 script += ")',[],function(){}, function(ex,ey){ alert(ey.message);} );\r\n";

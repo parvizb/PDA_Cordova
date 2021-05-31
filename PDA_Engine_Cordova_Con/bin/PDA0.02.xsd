@@ -9864,6 +9864,31 @@ zhihu
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
+
+
+  <xs:simpleType name="DataType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="INTEGER">
+        <xs:annotation>
+          <xs:documentation>عدد صحیح</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="REAL">
+        <xs:annotation>
+          <xs:documentation>عدد اعشاری</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TEXT">
+        <xs:annotation>
+          <xs:documentation>متن</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+       
+    </xs:restriction>
+  </xs:simpleType>
+  
+  
+  
   <xs:simpleType name="PagingMode">
     <xs:restriction base="xs:string">
       <xs:enumeration value="None">
@@ -12110,6 +12135,21 @@ zhihu
           
           
         </xs:element>
+        <xs:element name="DataBaseTable" maxOccurs="unbounded" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element maxOccurs="unbounded" name="Column" minOccurs="1">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" use="required" />
+                  <xs:attribute name="DataType" type="DataType" use="required" />
+                  <xs:attribute name="isPrimary" type="YesNo" use="optional" />
+                  <xs:attribute name="Caption" type="xs:string" use="optional" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
         <xs:element name="Include" minOccurs="0" maxOccurs="unbounded" >
           <xs:complexType>
              <xs:annotation><xs:documentation> ترکیب کردن یک فایل config دیگر </xs:documentation> </xs:annotation>
@@ -12121,6 +12161,11 @@ zhihu
             <xs:attribute name="ImportMenuItems" type="YesNo" use="required">
               <xs:annotation>
                 <xs:documentation>آیا اجزای منو دریافت شوند</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="ImportDataBaseTables" type="YesNo" use="required">
+              <xs:annotation>
+                <xs:documentation>آیا جدول های بانک اطلاعاتی دریافت شوند</xs:documentation>
               </xs:annotation>
             </xs:attribute>
             <xs:attribute name="ImportPages" type="YesNo" use="required">
@@ -12158,21 +12203,13 @@ zhihu
           <xs:documentation>نام انگلیسی برنامه</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attribute name="DBType" type="DBType" use="required">
-        <xs:annotation>
-          <xs:documentation>نوع بانک اطلاعاتی </xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
+     
       <xs:attribute name="Theme" type="Theme" use="required">
         <xs:annotation>
           <xs:documentation>قالب مورد استفاده</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-      <xs:attribute name="ConnectionSetthing" type="xs:string" use="required">
-        <xs:annotation>
-          <xs:documentation>رشته اتصال بانک اطلاعاتی</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
+     
       <xs:attribute name="CopyRightMessage" type="xs:string" use="optional">
         <xs:annotation>
           <xs:documentation>متن کپی رایت</xs:documentation>
