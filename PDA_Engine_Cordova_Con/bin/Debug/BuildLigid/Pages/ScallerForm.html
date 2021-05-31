@@ -1,0 +1,10 @@
+﻿
+
+{{Page.title}}
+<hr />
+{% include "Parameter"  %}
+{% if Page.HideDefaultButton != 'Yes' -%}
+<button type="button" class="btn btn-primary" onclick="{{Page.name}}.Submit(this)"><i class="fas fa-ok"></i> تایید</button>
+<button type="button" class="btn btn-default" onclick="BackPage()"><i class="fas fa-back"></i>بازگشت</button>
+{% endif -%}
+ {% include "PageButton" %}

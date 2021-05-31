@@ -1,0 +1,100 @@
+﻿تعریف
+<hr />
+<form class="NotPrintable form-horizontal"  role="form">
+  <div class="form-group">
+  </div>
+    </from>
+  <script>
+    
+    person_mgt.IntForm=function()
+    {
+    fromRecords=1;
+    toRecords=9999999999;
+    totalRecords=0;
+        document.title='تعریف';
+        window.pageName='person_mgt';
+    window.fileUploaded=false;
+        window.CurrentSerachMethod=person_mgt.Serach;
+    }
+    $(document).ready(function () {
+    person_mgt.IntForm();
+    
+    
+    });
+  </script>
+<button type="button" class="btn btn-default" onclick="BackPage()"><i class="fas fa-back"></i>بازگشت</button>
+<a onclick='person_mgt.InsertRecord()' ><button type="button" class="btn btn-default" > ردیف جدید</button></a>
+<a onclick='person_mgt.Save()' ><button type="button" class="btn btn-default" > ذخیره</button></a>
+
+<div class="table-responsive">
+<table class="table table-bordered table table-striped">
+<caption>جست و جو : <input  class="form-control" type="text" onkeyup="ResetCheck();" ng-model="FilterValue" placeholder="عبارت مورد نظر جهت جست و جو"  /> </caption>
+ <thead>
+ <tr>
+
+ 
+<th>ردیف</th>
+
+ <th  class="Pointer"  ng-click="ChageTableOrder('Id')"  > <span ng-show="((currentOrder=='Id') && (rev) )">V</span> <span ng-show="((currentOrder=='Id') && (!rev) )">^</span></th> 
+ <th  class="Pointer"  ng-click="ChageTableOrder('fullname')"  > <span ng-show="((currentOrder=='fullname') && (rev) )">V</span> <span ng-show="((currentOrder=='fullname') && (!rev) )">^</span></th> 
+ <th  class="Pointer"  ng-click="ChageTableOrder('cost')"  > <span ng-show="((currentOrder=='cost') && (rev) )">V</span> <span ng-show="((currentOrder=='cost') && (!rev) )">^</span></th> 
+ <th  class="Pointer"  ng-click="ChageTableOrder('BrithDate')"  > <span ng-show="((currentOrder=='BrithDate') && (rev) )">V</span> <span ng-show="((currentOrder=='BrithDate') && (!rev) )">^</span></th> 
+ <th  class="Pointer"  ng-click="ChageTableOrder('isbad')"  > <span ng-show="((currentOrder=='isbad') && (rev) )">V</span> <span ng-show="((currentOrder=='isbad') && (!rev) )">^</span></th> 
+ <th  class="Pointer"  ng-click="ChageTableOrder('IdAbout')"  > <span ng-show="((currentOrder=='IdAbout') && (rev) )">V</span> <span ng-show="((currentOrder=='IdAbout') && (!rev) )">^</span></th> 
+<th>
+    عملیات
+</th>
+                    
+ </tr>
+   </thead>
+           <tr fliterrows="person_mgtrecords" ng-init="record.viewIndex=$index" ng-repeat="record in person_mgtrecords | orderBy:currentOrder :rev | filter:FilterValue " >
+        <td data-label="ردیف">{{$index+1 + (   ( Num(fromRecords)==0 ? 0 : Num(fromRecords-1) )   )  }}</td>
+<td data-label=''>{{record.Id}}</td> 
+ 
+ <td data-label=''><input class="form-control" type="text" id="fullname_{{record.rndId}}" value="{{record.fullname}}" ng-change="ChangeState(record);"  ng-model="record.fullname"  /></td> 
+ 
+  <td data-label=''><input class="form-control" type="text" id="cost_{{record.rndId}}"  moneyType="yes"  onkeypress="return blockNonIntNumber(event)" ng-change="ChangeState(record);"   onkeyup="NumberInput(event,this)"   value="{{record.cost}}" ng-model="record.cost"  /></td> 
+
+  <td data-label=''>
+      <input  type="text"  onkeypress="return blockNonDateNumber(event)" id="BrithDate_{{record.rndId}}" ng-change="ChangeState(record);"  created="False" onfocus="if($(this).attr('created')=='False') { $(this).attr('created','True')  ; kamaDatepicker(this.id,{ buttonsColor: 'red' ,sync:'true',highlightSelectedDay:'true'});  this.focus();  } " data-type="date"   onBlur="ReformatDate(this.id)"  class="form-control"   placeholder="yyyy/mm/dd" max-length="10"    value="{{record.BrithDate}}" ng-model="record.BrithDate"  ></input>
+ </td> 
+
+  <td data-label=''><input class="form-control" type="text" id="isbad_{{record.rndId}}"  moneyType="yes"  onkeypress="return blockNonIntNumber(event)" ng-change="ChangeState(record);"   onkeyup="NumberInput(event,this)"   value="{{record.isbad}}" ng-model="record.isbad"  /></td> 
+
+ <td data-label=''><input class="form-control" type="text" id="IdAbout_{{record.rndId}}" value="{{record.IdAbout}}" ng-change="ChangeState(record);"  ng-model="record.IdAbout"  /></td> 
+ 
+ 
+             <td data-label=''>
+ <div class="btn-group">
+ <button type="button" class="btn btn-default dropdown-toggle "
+ data-toggle="dropdown">
+ عملیات <span class="caret"></span>
+ </button>
+ <ul class="dropdown-menu" role="menu">
+ <li ><a   ng-click="RemoveItem( record)"   >حذف</a></li> 
+
+ </ul>
+</div>
+</td>
+
+                        
+           </tr>
+     <tbody>
+</table>
+     
+    
+                 <form class="form-horizontal" role="form">
+    
+
+
+  <div class="form-group">
+ 
+
+</div>
+     <script>
+         $(document).ready(function () {
+             
+             resetPaging(); person_mgt.Serach();
+                      });
+    
+     </script>

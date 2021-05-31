@@ -1,0 +1,87 @@
+﻿نمایش همه رکورد ها
+<hr />
+<form class="NotPrintable form-horizontal"  role="form">
+  <div class="form-group">
+  </div>
+    </from>
+  <script>
+    
+    SelectAll.IntForm=function()
+    {
+    fromRecords=1;
+    toRecords=9999999999;
+    totalRecords=0;
+        document.title='نمایش همه رکورد ها';
+        window.pageName='SelectAll';
+    window.fileUploaded=false;
+        window.CurrentSerachMethod=SelectAll.Serach;
+    }
+    $(document).ready(function () {
+    SelectAll.IntForm();
+    
+    
+    });
+  </script>
+<button type="button" class="btn btn-default" onclick="BackPage()"><i class="fas fa-back"></i>بازگشت</button>
+
+<div class="table-responsive">
+<table class="table table-bordered table table-striped">
+<caption></caption>
+ <thead>
+ <tr>
+
+ 
+
+ <th  > کد</th> 
+ <th  > نام کامل</th> 
+ <th  > مبلغ</th> 
+<th>
+    عملیات
+</th>
+                    
+ </tr>
+   </thead>
+           <tr fliterrows="SelectAllrecords" ng-init="record.viewIndex=$index" ng-repeat="record in SelectAllrecords | orderBy:currentOrder :rev " >
+        <td data-label='کد'>{{record.Id}}</td> 
+ 
+<td data-label='نام کامل'>{{record.fullname}}</td> 
+ 
+<td data-label='مبلغ'>{{ShowMoney(record.cost)}}</td> 
+ 
+ 
+ 
+             <td data-label=''>
+ <div class="btn-group">
+ <button type="button" class="btn btn-default dropdown-toggle "
+ data-toggle="dropdown">
+ عملیات <span class="caret"></span>
+ </button>
+ <ul class="dropdown-menu" role="menu">
+ <li ><a href="#/Edit/{{record.Id}}" >    ویراش </a></li> 
+ <li ><a  pdaAjaxSyntax="ConfirmAsk('می خواهی حذف کنی ',function(){AjaxActions.Delete_act({{record.Id}})});" >حذف</a></li> 
+
+ </ul>
+</div>
+</td>
+
+                        
+           </tr>
+     <tbody>
+</table>
+     
+    
+                 <form class="form-horizontal" role="form">
+    
+
+
+  <div class="form-group">
+ 
+
+</div>
+     <script>
+         $(document).ready(function () {
+             
+             resetPaging(); SelectAll.Serach();
+                      });
+    
+     </script>

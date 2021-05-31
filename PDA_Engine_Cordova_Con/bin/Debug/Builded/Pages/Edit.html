@@ -1,0 +1,71 @@
+﻿
+
+رکورد جدید
+<hr />
+<form class="NotPrintable form-horizontal"  role="form">
+  <div class="form-group">
+    <label  for="fullname" class="col-sm-2 control-label">     <span class="red" >*</span>        نام
+      :</label>
+    <div   class="col-sm-4">
+   
+            <input type="text"   class="form-control" id="txtEditfullname" placeholder=""  placeholder="" />
+                                                                                                
+      
+                            
+    </div>
+    <label  for="cost" class="col-sm-2 control-label">           مبلغ
+      :</label>
+    <div   class="col-sm-4">
+   
+                                                               <input type="Text"  onkeypress="return blockNonIntNumber(event)" placeholder="" moneytype="yes"  onkeyup="NumberInput(event,this)" class="form-control" id="txtEditcost" placeholder="" />
+                                             
+      
+                            
+    </div>
+     </div>
+     <div class="form-group">
+    <label  for="BrithDate" class="col-sm-2 control-label">     <span class="red" >*</span>        تاریخ
+      :</label>
+    <div   class="col-sm-4">
+   
+                                                                                                
+      
+                              <input  type="text"    onBlur="ReformatDate('txtEditBrithDate')"  class="form-control" id="txtEditBrithDate" placeholder="yyyy/mm/dd" max-length="10" ></input>
+          
+    </div>
+    <label  for="isbad" class="col-sm-2 control-label">     <span class="red" >*</span>        خوبه
+      :</label>
+    <div   class="col-sm-4">
+   
+                                                   <input type="CheckBox"  placeholder=""   id="txtEditisbad" placeholder="" />
+                                                         
+      
+                            
+    </div>
+     </div>
+     <div class="form-group">
+  </div>
+    </from>
+  <script>
+                                            
+    Edit.IntForm=function()
+    {
+    fromRecords=1;
+    toRecords=9999999999;
+    totalRecords=0;
+        document.title='رکورد جدید';
+        window.pageName='Edit';
+    window.fileUploaded=false;
+                                                                            kamaDatepicker('txtEditBrithDate', { buttonsColor: "red" ,sync:'true',highlightSelectedDay:'true'});
+                                                                                window.CurrentSerachMethod=Edit.Serach;
+    }
+    $(document).ready(function () {
+    Edit.IntForm();
+        Edit.InitStartValues();
+    
+    
+    });
+  </script>
+<button type="button" class="btn btn-primary" onclick="Edit.Submit(this)"><i class="fas fa-ok"></i> تایید</button>
+<button type="button" class="btn btn-default" onclick="BackPage()"><i class="fas fa-back"></i>بازگشت</button>
+ 

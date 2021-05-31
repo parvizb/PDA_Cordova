@@ -1,0 +1,13 @@
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\PDA_Engine_Cordova_Con.exe.config
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\obj\Debug\PDA_Engine_Cordova_Con.exe
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\obj\Debug\PDA_Engine_Cordova_Con.pdb
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\PDA_Engine_Cordova_Con.exe
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\PDA_Engine_Cordova_Con.pdb
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\DotLiquid.dll
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\NCalc.dll
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\Newtonsoft.Json.dll
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\RazorTemplates.Core.dll
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\Antlr3.Runtime.dll
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\Newtonsoft.Json.xml
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\bin\Debug\RazorTemplates.Core.xml
+C:\Users\PMB\documents\visual studio 2012\Projects\PDA_Engine_Cordova_Con\PDA_Engine_Cordova_Con\obj\Debug\PDA_Engine_Cordova_Con.csprojResolveAssemblyReference.cache
