@@ -26,5 +26,13 @@
 {% if btn.action == 'ExportXls'  -%}
 <a onclick='ExportXls();' ><button type="button" class="btn btn-default" >{%if btn.Icon != '' -%}<i class="fas fa-{{btn.Icon}}" /> {% endif %} {{btn.title}}</button></a>
 {% endif -%}
+{% if btn.action == 'Backup'  -%}
+<a onclick='GetBackupDownload();' ><button type="button" class="btn btn-default" >{%if btn.Icon != '' -%}<i class="fas fa-{{btn.Icon}}" /> {% endif %} {{btn.title}}</button></a>
+{% endif -%}
+{% if btn.action == 'Restore'  -%}
+<a onclick='RestoreBackup();' ><button type="button" class="btn btn-default" >{%if btn.Icon != '' -%}<i class="fas fa-{{btn.Icon}}" /> {% endif %} {{btn.title}}</button></a>
+{% endif -%}
+
+
 {% endfor -%}
 

@@ -2400,7 +2400,7 @@ namespace PDA_Engine_Cordova_Con
                 }
             }
             string x = "?SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
-            string script = "var db = window.openDatabase('" + App.Name + "', 1.0, 'PDB" + App.Name+"', 2*1024*1024);\r\n";
+            string script = "var dbname='" + App.Name+ "';var db = window.openDatabase('" + App.Name + "', 1.0, 'PDB" + App.Name+"', 2*1024*1024);\r\n";
             script+="db.transaction(function (tx) { \r\n  ";
             //DataTable DX= PDAL.ReadRecords(ref x, new List<inputParameter>());
             for (int a = 0; a < App.DataBaseTables.Count; a++)

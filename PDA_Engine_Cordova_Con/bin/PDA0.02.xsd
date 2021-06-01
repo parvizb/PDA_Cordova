@@ -10503,6 +10503,16 @@ zhihu
           <xs:documentation>به یک صفحه خاص برود</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
+      <xs:enumeration value="Backup">
+        <xs:annotation>
+          <xs:documentation>ایجاد پشیتان و ارسال دانلود </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Restore">
+        <xs:annotation>
+          <xs:documentation>انتخاب فایل و انجام بازیابی</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
       <xs:enumeration value="dynLink">
         <xs:annotation>
           <xs:documentation>لینک پویا (طبق سیستم angluer) </xs:documentation>
