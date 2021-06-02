@@ -1174,6 +1174,8 @@ function ExportXls(id) {
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
+        download(window.pageName,tab_text,'data:application/vnd.ms-excel')
+
     }
 }
 
@@ -1460,24 +1462,183 @@ function GetBackupDownload() {
     websqldump.export({
         database: dbname, version: "1", success: function (sql) {
 
-            var filename = 'export_' + '_' + new Date().toLocaleDateString() + '.sql';
+            var filename = 'export_' + '_' + new Date().toLocaleDateString() + '.txt';
             var link = document.createElement('a');
-            link.style.display = 'none';
+            //link.style.display = 'none
+            link.innerHTML = "دریافت کن";
             link.setAttribute('target', '_blank');
             link.setAttribute('href', 'data:text/sql;charset=utf-8,' + encodeURIComponent(sql));
             link.setAttribute('download', filename);
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link);
+             window.filename=filename;
+             fContent = sql;
+             window.filename = filename
+             var  shareData = {
+                 title: 'backup',
+                 text: sql,
+                 url: sql,
+             }
+            //  Navigator.share(shareData);
 
 
+             //Messager.ShowMessage("Script", sql);
+             //downloader.init({ folder: "Download", unzip: false, delete: false });
+             //downloader.get(link.href, null, filename);
+           /*  window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+                 alert(window.filename);
+                 console.log('file system open: ' + fs.name);
+                 fs.root.getFile("Backup.sql", { create: true, exclusive: false }, function (fileEntry) {
 
+                     console.log("fileEntry is file?" + fileEntry.isFile.toString());
+                     // fileEntry.name == 'someFile.txt'
+                     // fileEntry.fullPath == '/someFile.txt'
+                     writeFile(fileEntry, null);
+
+                 }, onErrorCreateFile);
+
+             }, onErrorLoadFs);
+             */
+
+
+              var storageLocation = "";
+               
+           
+              storageLocation = 'file:///storage/emulated/0/';
+              window.resolveLocalFileSystemURL(storageLocation,
+                  function (fileSystem) {
+
+                      fileSystem.getDirectory('Download', {
+                          create: true,
+                          exclusive: false
+                      },
+                          function (directory) {
+
+                              //You need to put the name you would like to use for the file here.
+                              directory.getFile("backup.sql", {
+                                  create: true,
+                                  exclusive: false
+                              },
+                                  function (fileEntry) {
+
+
+                                      fileEntry.createWriter(function (writer) {
+                                          writer.onwriteend = function () {
+                                              console.log("File written to downloads")
+                                          };
+
+                                          writer.seek(0);
+                                          writer.write(fContent); //You need to put the file, blob or base64 representation here.
+
+                                      }, errorCallback);
+                                  }, errorCallback);
+                          }, errorCallback);
+                  }, errorCallback);
+
+              var errorCallback = function (e) {
+
+                  alert("Error: " + JSON.stringify(e))
+
+              }
+
+
+              document.body.removeChild(link);
+       
         }, error: function (message) {
             throw new Error(message);
         }
     });
 
 
+}
+function onErrorCreateFile(zzzz) {
+
+    alert('onCreate-'+  JSON.stringify(zzzz));
+}
+function onErrorReadFile(zzzz) {
+    alert('onRead' +JSON.stringify(zzzz));
+
+}
+function readFile(fileEntry) {
+
+    fileEntry.file(function (file) {
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            console.log("Successful file read: " + this.result);
+            alert(fileEntry.fullPath + ": " + this.result);
+        };
+
+        reader.readAsText(file);
+
+    }, onErrorReadFile);
+}
+var fContent = '';
+var fileName=''
+function writeFile(fileEntry, dataObj) {
+    // Create a FileWriter object for our FileEntry (log.txt).
+    fileEntry.createWriter(function (fileWriter) {
+
+        fileWriter.onwriteend = function () {
+            console.log("Successful file write...");
+            readFile(fileEntry);
+        };
+
+        fileWriter.onerror = function (e) {
+            console.log("Failed file write: " + e.toString());
+        };
+
+        // If data object is not passed in,
+        // create a new Blob instead.
+        if (!dataObj) {
+            dataObj = new Blob([fContent], { type: 'text/plain' });
+        }
+
+        fileWriter.write(dataObj);
+    });
+}
+
+
+
+function onErrorLoadFs(zzzz) {
+    alert('onLoad'+ JSON.stringify(zzzz));
+
+
+}
+
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    window.open = cordova.InAppBrowser.open;
+}
+function dataURItoBlob(dataURI) {
+    var isBase64 = dataURI.split(",")[0].split(";")[1] === "base64";
+    var byteString;
+
+    if (isBase64) {
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+        byteString = atob(dataURI.split(",")[1]);
+    } else {
+        byteString = dataURI.split(",")[1];
+    } // separate out the mime component
+
+    var mimeString = dataURI
+      .split(",")[0]
+      .split(":")[1]
+      .split(";")[0]; // write the bytes of the string to an ArrayBuffer
+
+    var ab = new ArrayBuffer(byteString.length); // create a view into the buffer
+
+    var ia = new Uint8Array(ab); // set the bytes of the buffer to the correct values
+
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    } // write the ArrayBuffer to a blob, and you're done
+
+    var blob = new Blob([ab], {
+        type: mimeString
+    });
+    return blob;
 }
 
 function RestoreBackup() {
@@ -1512,4 +1673,71 @@ function RestoreBackup() {
     d.click();
 
 
+}
+ 
+function download(filename, data, mimeType) {
+    var blob = new Blob([data], {
+        type: mimeType
+    });
+    if (window.cordova && cordova.platformId !== "browser") {
+        document.addEventListener("deviceready", function () {
+            var storageLocation = "";
+      
+            switch (cordova.platformId) {
+                case "android":
+                    storageLocation = cordova.file.applicationDirectory;
+                    break;
+
+                case "iOS":
+                    storageLocation = cordova.file.documentsDirectory;
+                    break;
+            }
+            alert(storageLocation);
+            var folderPath = storageLocation;
+
+            window.resolveLocalFileSystemURL(
+              folderPath,
+              function (dir) {
+                  dir.getFile(
+                    filename,
+                    {
+                        create: true
+                    },
+                    function (file) {
+                        file.createWriter(
+                          function (fileWriter) {
+                              fileWriter.write(blob);
+
+                              fileWriter.onwriteend = function () {
+                                  var url = file.toURL();
+                                  alert(url);
+                              };
+
+                              fileWriter.onerror = function (err) {
+                                  alert('4-' + JSON.stringify(err));
+                                  console.error(err);
+                              };
+                          },
+                          function (err) {
+                              // failed
+                              alert('3-' + JSON.stringify(err));
+                              console.error(err);
+                          }
+                        );
+                    },
+                    function (err) {
+                        alert('2-' + JSON.stringify(err));
+                        console.error(err);
+                    }
+                  );
+              },
+              function (err) {
+                  alert('1-' + JSON.stringify(err));
+                  console.error();
+              }
+            );
+        });
+    } else {
+      //   saveAs(blob, filename);
+    }
 }
