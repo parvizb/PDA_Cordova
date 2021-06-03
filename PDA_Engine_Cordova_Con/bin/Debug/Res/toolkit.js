@@ -40,7 +40,7 @@
                     for (var ri = 0; ri < data[l].length; ri++) {
                         console.log("ri:" + ri);
                         for (var ri2 = 1; ri2 < data[l][ri].length; ri2++) {
-                            console.log("ri2:" + ri2);
+                            console.log("ri2:" + ri2);s
                                 var noValue = false;
                                 if (data[l][ri][ri2][index].value == "") {
                                     noValue = true;
@@ -1514,7 +1514,12 @@ function RestoreBackup() {
     d.click();
 
 
-}function GetBackupDownload() {
+}
+filename='';
+fContent='';
+
+
+function GetBackupDownload() {
     websqldump.export({
         database: dbname, version: "1", success: function (sql) {
 
@@ -1527,6 +1532,22 @@ function RestoreBackup() {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+window.filename= filename;
+window.fContent=sql;
+window.targetPath='';
+window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+
+    //var absPath = "file:///storage/emulated/0/";
+    var absPath = cordova.file.externalRootDirectory;
+    var fileDir = cordova.file.externalDataDirectory.replace(cordova.file.externalRootDirectory, '');
+   // var fileName = "somename.txt";
+    var filePath = fileDir + 'backup.sql' ;
+ window.targetPath=filePath;
+
+    fs.root.getFile(filePath, { create: true, exclusive: false }, function (fileEntry) {
+        writeFile(fileEntry);
+    }, function(err) {});
+}, function(err) {});
 
 
 
@@ -1573,5 +1594,17 @@ function RestoreBackup() {
 }
 
 
+function writeFile(fileEntry) {
+    // Create a FileWriter object for our FileEntry (log.txt).
+    fileEntry.createWriter(function (fileWriter) {
 
+        
+       
+      dataObj = new Blob([window.fContent], { type: 'text/plain' });
+        fileWriter.write(dataObj);
+          Messager.ShowMessage(' بکاپ ذخیره شد  محل فایل<br />' +  AllReplace(targetPath,'/','</br>'),'');
  
+
+         
+    });
+}
