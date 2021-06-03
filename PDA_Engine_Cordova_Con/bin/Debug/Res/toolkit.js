@@ -40,7 +40,7 @@
                     for (var ri = 0; ri < data[l].length; ri++) {
                         console.log("ri:" + ri);
                         for (var ri2 = 1; ri2 < data[l][ri].length; ri2++) {
-                            console.log("ri2:" + ri2);s
+                            console.log("ri2:" + ri2);
                                 var noValue = false;
                                 if (data[l][ri][ri2][index].value == "") {
                                     noValue = true;
