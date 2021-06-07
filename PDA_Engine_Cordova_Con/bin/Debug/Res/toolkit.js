@@ -1471,6 +1471,15 @@ function GetBackupDownload() {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+ FilesDownloader.download('https://cordova.apache.org/static/img/cordova_256.png', file, {
+    title: 'Downloading...',
+    extract: false
+}, (result) => {
+    // progress
+}, (err) => {
+    // err
+    alert(JSON.stringify(err));
+});
 
 
 
@@ -1539,13 +1548,17 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
     //var absPath = "file:///storage/emulated/0/";
     var absPath = cordova.file.externalRootDirectory;
+    
     var fileDir = cordova.file.externalDataDirectory.replace(cordova.file.externalRootDirectory, '');
    // var fileName = "somename.txt";
     var filePath = fileDir + 'backup.sql' ;
+//alert(filePath);
+  //  filePath='/storage/emulated/0/download/backup.sql';
  window.targetPath=filePath;
-
+// alert(filePath);
     fs.root.getFile(filePath, { create: true, exclusive: false }, function (fileEntry) {
         writeFile(fileEntry);
+        downloadFilex();
     }, function(err) {});
 }, function(err) {});
 
@@ -1558,6 +1571,30 @@ window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 
 
 }
+function downloadFilex() {
+    var fileTransfer = new FileTransfer();
+    var uri = 'data:text/sql;charset=utf-8,' + encodeURIComponent(window.fContent);
+    var fileURL = '/storage/emulated/0/Download/Backup.sql';
+     
+    fileTransfer.download(
+        uri,fileURL , function(entry) {
+          Messager.ShowMessage ("پشتیبان گیری ","با موفقیت انجام شد"  + entry.toURL());
+       },
+         
+       function(error) {
+          console.log("download error source " + error.source);
+           console.log("download error target " + error.target);
+           console.log("download error code" + error.code);
+       },
+         
+       false, {
+         
+       }
+    );
+ }
+
+
+
 
 function RestoreBackup() {
     var d = document.createElement("input");

@@ -591,6 +591,30 @@ namespace PDA_Engine_Cordova_Con
             return s;
 
         }
+        public DataTable GenDataTableToDataTable(DataBaseTable DataTable)
+        {
+            DataTable Dx = new DataTable();
+            string[] colnames = new string[] {"name","name_type","is_primary_key","descr" };
+            foreach (string co in colnames)
+            {
+                Dx.Columns.Add(new DataColumn(co, "temp".GetType()));
+
+            }
+            foreach (Column C in DataTable.Columns)
+            {
+                DataRow Dr = Dx.NewRow();
+                Dr["name"] = C.Name;
+                Dr["name_type"] = C.DataType;
+                Dr["is_primary_key"] = C.isPrimary == "Yes" ? "1" : "0";
+                Dr["descr"] = C.Caption;
+                Dx.Rows.Add(Dr); 
+
+            }
+         
+
+            return Dx;
+
+        }
 
         public static string GetDesc(string key)
         {
@@ -2278,6 +2302,28 @@ namespace PDA_Engine_Cordova_Con
             }
             return elements[0];
         }
+        public static string ProcessNode(XmlNode Node, string name)
+        {
+            if (name == "InsertPage")
+            {
+
+               Template t= GetTemplate(MapPath("~\\CodeLigiud\\Insert.xml"));
+               string TableName = Node.Attr("TableName");
+               DataBaseTable Dt = null;
+               foreach( DataBaseTable D in App.DataBaseTables)
+               {
+                   if(D.name==TableName)
+                   {
+                       Dt=D;
+                      break;
+
+                   }
+               }
+             return   t.Render(Hash.FromAnonymousObject(new {Name=TableName,Table=Dt  }));
+            }
+
+            return "Error not set";
+        }
         public static void load()
         {
             dontBeBuild.Clear();
@@ -2294,10 +2340,71 @@ namespace PDA_Engine_Cordova_Con
                 dontBeBuild.Add(Ap.DontBuilds[k].FileName);
 
             }
-
+           
             Console.WriteLine("PDA.Config Loaded.");
             App = Ap;
-            loaded = true;
+            bool mustReload = false;
+            XmlNodeList XList = XmlDoc.SelectNodes("//*");
+            foreach( XmlNode  x in XList)
+            {
+                if (x.Name == "DynCode")
+                {
+                    mustReload = true;
+                  string name=  x.Attr("Name");
+                  string ret = ProcessNode(x, name);
+                    XmlDocument Do=new XmlDocument();
+                    Do.LoadXml(ret);
+                    XmlNode te=x.OwnerDocument.ImportNode(Do.ChildNodes[0],true);
+                    x.ParentNode.InsertBefore(te, x);
+                    x.ParentNode.RemoveChild(x);
+                }
+
+            }
+            if (mustReload)
+            {
+                XmlDoc.Save(PDAL.MapPath("~\\PDA.Config"));
+
+                XmlDoc = new XmlDocument();
+                XmlDoc.LoadXml(System.IO.File.ReadAllText(PDAL.MapPath("~\\PDA.Config")));
+                el = GetElement(XmlDoc, "Application");
+                RootElement = el;
+                Ap = new App();
+                Ap.RootNode = el;
+                Ap.ParseEle(el);
+                App = Ap;
+                loaded = true;
+            }
+            bool mustReEval = false;
+              XList = XmlDoc.SelectNodes("//*");
+            foreach (XmlNode x in XList)
+            {
+                if (x.Name == "DynNode")
+                {
+                    mustReEval = true;
+                    string name = x.Attr("Name");
+                    string ret = ProcessNode(x, name);
+                    XmlDocument Do = new XmlDocument();
+                    Do.LoadXml(ret);
+                    XmlNode te = x.OwnerDocument.ImportNode(Do.ChildNodes[0], true);
+                    x.ParentNode.InsertBefore(te, x);
+                    x.ParentNode.RemoveChild(x);
+                }
+
+            }
+
+            if (mustReEval == true)
+            {
+                el = GetElement(XmlDoc, "Application");
+                RootElement = el;
+                Ap = new App();
+                Ap.RootNode = el;
+                Ap.ParseEle(el);
+                App = Ap;
+                loaded = true;
+
+            }
+
+
             for (int k = 0; k < PDAL.App.Pagess.Count; k++)
             {
                 for (int l = 0; l < PDAL.App.Pagess[k]._Pages.Count; l++)

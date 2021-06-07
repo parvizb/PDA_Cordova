@@ -394,6 +394,7 @@ namespace PDA_Engine_Cordova_Con
         public string Caption;
         public string DataType;
         public string isPrimary;
+        
         public void ParseEle(XmlNode T)
         {
             Name = T.Attr("Name");
@@ -403,7 +404,7 @@ namespace PDA_Engine_Cordova_Con
 
 
         }
-
+      
         public object ToLiquid()
         {
             return Hash.FromAnonymousObject(new { Name=this.Name,Caption=this.Caption,DataType=this.DataType,isPrimary=this.isPrimary });

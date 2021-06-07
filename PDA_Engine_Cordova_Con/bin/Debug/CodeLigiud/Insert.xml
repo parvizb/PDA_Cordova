@@ -1,0 +1,8 @@
+<Page name="Insert" ColumnCount="2" DBCommand="#{{Name}},insert" Title="رکورد جدید" link="Insert" type="ScallerForm">
+ {% for col in  Table.Columns -%}
+       <PageParameter type="String" name="{{col.Name}}" title="{{col.Caption}}" source="form">
+        <ParameterCheck Cond="Reg" />
+      </PageParameter>
+ {% endfor -%}
+
+</Page>
