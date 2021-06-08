@@ -898,6 +898,7 @@ function Select2AjaxInitTable(id, fun) {
     return r;
 
 }
+
 function NumberInput(e, t) {
     t.value = t.value.replace(/,/g, '');
     t.value = addCommas(t.value);
@@ -1645,3 +1646,77 @@ function writeFile(fileEntry) {
          
     });
 }
+
+
+
+function ImportObjectToDataBase(tablename,records,clearTable,showerr)
+{
+   var listdb=new Array();
+
+    db.transaction(function (tx) {
+        if(clearTable )
+        {
+          listdb.push('Delete from' + tablename);   
+        }
+              for(var i=0;i<records.length;i++)
+                {
+                  var state="Insert into " + tablename + " (";
+                  var keys=Object.keys(records[i])
+                  for(var r=0;r<  keys.length;r++ )
+                  {
+                    if(r!=0)
+                    {
+                        state+=","
+                    }
+                    state+='['  + keys[r] +']';
+ 
+                  }   
+                  state+=') values ('
+                  for(var r=0;r<  keys.length;r++ )
+                  {
+                    if(r!=0)
+                    {
+                        state+=","
+                    }
+                    state+='\''  + records[i][ keys[r]] +'\'';
+ 
+                  }
+                  state+=')';
+                  console.log(state);
+                  listdb.push(state);
+                }
+                
+          for(var l=0;l<listdb.length;l++)
+          {
+            tx.executeSql(listdb[l], [], function (tx, results) {
+                 
+            }, function (a, err) {   console.log(err.message);
+                if(showerr)
+                {
+                Messager.ShowMessage( "خطا",err.message);
+                }
+              return ; 
+            });
+
+          }       
+ 
+    });
+}
+
+function ReadJsonToSendData(url,dataTable,clearTable)
+{
+  var x=new XMLHttpRequest();
+  x.open("get",url);
+ x.onreadystatechange=function()
+ {
+   if(x.readyState==4)
+   {
+     var data=JSON.parse(x.response)
+      ImportObjectToDataBase(dataTable,data,clearTable)
+   }
+
+
+ }
+ x.send();
+}
+
