@@ -12146,36 +12146,78 @@ zhihu
           
         </xs:element>
         <xs:element name="DataBaseTable" maxOccurs="unbounded" >
+          <xs:annotation>
+            <xs:documentation>تعریف یک جدول از بانک اطلاعاتی</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:element maxOccurs="unbounded" name="Column" minOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>تعریف ستون جدول</xs:documentation>
+                </xs:annotation>
                 <xs:complexType>
-                  <xs:attribute name="Name" type="xs:string" use="required" />
-                  <xs:attribute name="DataType" type="DataType" use="required" />
-                  <xs:attribute name="isPrimary" type="YesNo" use="optional" />
-                  <xs:attribute name="Caption" type="xs:string" use="optional" />
+                  <xs:attribute name="Name" type="xs:string" use="required" >
+                    <xs:annotation><xs:documentation>نام ستون</xs:documentation></xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="DataType" type="DataType" use="required" >
+                    <xs:annotation>
+                      <xs:documentation>نوع داده </xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="isPrimary" type="YesNo" use="optional" >
+                    <xs:annotation>
+                      <xs:documentation>آیا کلید اصلی هست یا نه هر جدول فقط یک کلید اصلی دارد</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="Caption" type="xs:string" use="optional" >
+                    <xs:annotation>
+                      <xs:documentation>عنوان ستون</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" >
+              <xs:annotation>
+                <xs:documentation>نام جدول </xs:documentation> </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
         <xs:element name="PrecreatedData" maxOccurs="unbounded" >
+          <xs:annotation>
+            <xs:documentation>بارگذاری اطلاعات یک فایل json دورن یک جدول اطلاعاتی</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
+           
             <xs:sequence>
               
             </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required" />
-            <xs:attribute name="url" type="xs:string" use="required" />
+            <xs:attribute name="name" type="xs:string" use="required" >
+              <xs:annotation>
+                <xs:documentation>نام جدول مورد نظر جهت درج</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
+            <xs:attribute name="url" type="xs:string" use="required" >
+              <xs:annotation>
+                <xs:documentation>نام فایل مورد نظر  نکته فایل نظر بایستی در پوشه PrecreatedJsonData باشد </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
         <xs:element name="StoredProc" maxOccurs="unbounded" >
+          <xs:annotation>
+            <xs:documentation> رویه اجرایی بانکی اطلاعاتی  دورن تگ بایستی دستورات نوشته شوند</xs:documentation>
+          </xs:annotation>
           <xs:complexType>
             <xs:sequence>
               <xs:any maxOccurs="unbounded" minOccurs="0"></xs:any>
             </xs:sequence>
-            <xs:attribute name="name" type="xs:string" use="required" />
-            
+            <xs:attribute name="name" type="xs:string" use="required" >
+              
+              <xs:annotation>
+                <xs:documentation> نام رویه جهت فراخوانی</xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
         <xs:element name="Include" minOccurs="0" maxOccurs="unbounded" >
