@@ -2468,15 +2468,22 @@ namespace PDA_Engine_Cordova_Con
                 BuildFile("~\\BuildLigid\\scripts\\config.js", "~\\output\\builded\\scripts\\config.js");
             }
                 Template T= GetTemplate(MapPath("~\\BuildLigid\\scripts\\controller.js"));
+
+
+                int a = 0;
             for (int k = 0; k < PDAL.App.Pagess.Count; k++)
             {
                 for (int L = 0; L < PDAL.App.Pagess[k]._Pages.Count; L++)
                 {
                     int index = PDAL.dontBeBuild.IndexOf(PDAL.App.Pagess[k]._Pages[L].name + ".js");
+                    a += 1;
                     if (index == -1)
                     {
+
+
+                         
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("Creating Controller for ->" + PDAL.App.Pagess[k]._Pages[L].name +":");
+                        Console.Write( (int)( (((float) (a)/(float)PageAccess.Count)*100f ) ) + "% ->Creating Controller for ->" + PDAL.App.Pagess[k]._Pages[L].name +":");
                         File.WriteAllText(MapPath("~\\output\\builded\\scripts\\controllers\\" + PDAL.App.Pagess[k]._Pages[L].name + ".js"), T.Render(Hash.FromAnonymousObject(new { Page = PDAL.App.Pagess[k]._Pages[L] })), System.Text.UTF8Encoding.UTF8);
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("OK!");
@@ -2503,15 +2510,18 @@ namespace PDA_Engine_Cordova_Con
                 Temps.Add(System.IO.Path.GetFileNameWithoutExtension(F.Name), te);
 
             }
+            int  pss = 0;
             for (int q = 0; q < App.Pagess.Count; q++)
             {
                 for (int l = 0; l < App.Pagess[q]._Pages.Count; l++)
                 {
+                    pss += 1;
                     int index = PDAL.dontBeBuild.IndexOf(PDAL.App.Pagess[q]._Pages[l].name + ".html");
                     if (index == -1)
                     {
+                       
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.Write("Create UI Page For ->" + PDAL.App.Pagess[q]._Pages[l].name +":");
+                        Console.Write((int)((((float)(pss) / (float)PageAccess.Count) * 100f)) + "% -> Create UI Page For ->" + PDAL.App.Pagess[q]._Pages[l].name + ":");
                         System.IO.File.WriteAllText(MapPath("~\\Output\\Builded\\Pages\\") + App.Pagess[q]._Pages[l].name + ".html", Temps[App.Pagess[q]._Pages[l].type].Render(Hash.FromAnonymousObject(new { Page = App.Pagess[q]._Pages[l] })), System.Text.UTF8Encoding.UTF8);
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("OK!");
@@ -2632,7 +2642,7 @@ namespace PDA_Engine_Cordova_Con
             System.IO.Directory.CreateDirectory(MapPath("~\\Output\\Builded\\Scripts\\controllers"));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OK!");
-            string[] folderToCopy = {"Res","webfonts","fonts" ,"tinymce","PrecreatedJsonData"};
+            string[] folderToCopy = {"Res","webfonts","fonts" ,"tinymce","PrecreatedJsonData","images"};
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Copying Resource:");
             foreach (string r in folderToCopy)
