@@ -402,7 +402,19 @@ namespace PDA_Engine_Cordova_Con
                     return Com;
                     break;
                 default:
-                       Com = new SqlCommand(command, Con);
+                    string r="";
+                    foreach (StoredProc Sp in PDAL.App.StoredProcs)
+                    {
+
+                        if (Sp.name == command)
+                        {
+                            r = Sp.Proc;
+
+                        }
+                    }
+                    r = r.Replace("\r\n", "");
+                       Com = new SqlCommand(r, Con);
+                       command = "?" + r;
                     Com.CommandType = CommandType.StoredProcedure;
                     return Com;
                     break;
@@ -2620,7 +2632,7 @@ namespace PDA_Engine_Cordova_Con
             System.IO.Directory.CreateDirectory(MapPath("~\\Output\\Builded\\Scripts\\controllers"));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OK!");
-            string[] folderToCopy = {"Res","webfonts","fonts" ,"tinymce"};
+            string[] folderToCopy = {"Res","webfonts","fonts" ,"tinymce","PrecreatedJsonData"};
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Copying Resource:");
             foreach (string r in folderToCopy)

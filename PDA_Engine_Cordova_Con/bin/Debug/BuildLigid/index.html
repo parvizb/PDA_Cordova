@@ -74,9 +74,9 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
           {% for  item in  menu.Items -%}
           {% if item.Type !='PDATextboxLink' -%}
           <li {% if item.SubItems.size >0 -%} class="dropdown" {% endif -%}  >
-            <a {% if  item.SubItems.size > 0 -%}
+            <a   {% if  item.SubItems.size > 0 -%}
              class="dropdown-toggle" data-toggle="dropdown" {% endif -%}
-            {% if item.Type=='Link' or item.Type =='PDALink'  -%} href="{% if item.Type=='Link' -%}{{item.link}}{% else -%}#/{{item.link}}{% endif -%}" {% endif -%}
+            {% if item.Type== 'Link' or item.Type =='PDALink'  -%} href="{% if item.Type == 'Link' -%}{{item.link}}{% else -%}#/{{item.link}}{% endif -%}" {% endif -%}
             {% if item.Type=='JavaScript'  -%} onclick="item.link" {% endif -%}
             >
             {% if item.SubItems.size >0 -%}
@@ -321,6 +321,12 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
         <script src="dbCreate.js"></script>
         <script src="batchinfo.js"></script>
         <script src="Builded/Scripts/dbaction.js"></script>
+        <script>
+         {% for  x in App.PrecreatedDatas -%}
+         ReadJsonToSendData('PrecreatedJsonData/{{x.url}}','{{x.name}}',false);
+         {%endfor -%}
+
+        </script>
       </body>
   <script>
     {{config}}

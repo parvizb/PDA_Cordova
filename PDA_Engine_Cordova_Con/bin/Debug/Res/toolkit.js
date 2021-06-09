@@ -40,7 +40,7 @@
                     for (var ri = 0; ri < data[l].length; ri++) {
                         console.log("ri:" + ri);
                         for (var ri2 = 1; ri2 < data[l][ri].length; ri2++) {
-                            console.log("ri2:" + ri2);s
+                            console.log("ri2:" + ri2);
                                 var noValue = false;
                                 if (data[l][ri][ri2][index].value == "") {
                                     noValue = true;
@@ -155,6 +155,10 @@ function Ajax(pageName, Mehtod, jData, fnOk, fnFail) {
     if (Mehtod == "AjaxAction") {
         Command = DBAction("aa_" + obj.actionName, "AjaxAction");
         Scaller(Command, obj.Parameters, fnOk, fnFail);
+    }
+    if (Mehtod == "AjaxActionTable") {
+        Command = DBAction("aa_" + obj.actionName, "AjaxAction");
+        ReadTable(Command, obj.Parameters, fnOk, fnFail);
     }
     if (Mehtod == "getDBSelect2DirectValue") {
         var data = obj;
@@ -618,7 +622,7 @@ function TableViewAjax(name, data, fnOk, fnFailOk) {
     },
     function (data) {
 
-        Messager.errors.push('خطا نامشخص');
+        Messager.errors.push('خطا نامشخص' + JSON.stringify(data));
         Validator.ShowErrors();
         fnFailOk('خطا نا مشخص');
     })
@@ -911,7 +915,17 @@ function ShowAsMoney(v) {
     return v;
 }
 function ShowBoolean(v) {
-    switch (v) {
+   
+  
+
+
+    switch (v.toString()) {
+        case '0':
+            return 'خیر';
+            break;
+       case '1':
+                return 'بله';
+                break;
         case 'True':
             return 'بله';
             break;

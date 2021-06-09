@@ -224,7 +224,9 @@ namespace PDA_Engine_Cordova_Con
         public List<Actions> Actionss = new List<Actions>();
         public List<DontBuild> DontBuilds = new List<DontBuild>();
         public List<Notifaction> Notifactions = new List<Notifaction>();
+        public List<PrecreatedData> PrecreatedDatas = new List<PrecreatedData>();
         public List<DataBaseTable> DataBaseTables = new List<DataBaseTable>();
+        public List<StoredProc> StoredProcs = new List<StoredProc>();
         public void ParseEle(XmlNode node)
         {
 
@@ -261,6 +263,12 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     Notifactions.Add(Temp);
                 }
+                if (node.ChildNodes[i].Name == "StoredProc")
+                {
+                    StoredProc Temp = new StoredProc();
+                    Temp.ParseEle(node.ChildNodes[i]);
+                    StoredProcs.Add(Temp);
+                }
                 if (node.ChildNodes[i].Name == "Pages")
                 {
                     Pages Temp = new Pages();
@@ -291,6 +299,12 @@ namespace PDA_Engine_Cordova_Con
                     DataBaseTable Temp = new DataBaseTable();
                     Temp.ParseEle(node.ChildNodes[i]);
                     DataBaseTables.Add(Temp);
+                }
+                if (node.ChildNodes[i].Name == "PrecreatedData")
+                {
+                    PrecreatedData Temp = new PrecreatedData();
+                    Temp.ParseEle(node.ChildNodes[i]);
+                    PrecreatedDatas.Add(Temp);
                 }
                 if (node.ChildNodes[i].Name == "CopyElements")
                 {
@@ -356,11 +370,50 @@ namespace PDA_Engine_Cordova_Con
         }
         public object ToLiquid()
         {
-            return Hash.FromAnonymousObject(new { Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
+            return Hash.FromAnonymousObject(new { PrecreatedDatas = this.PrecreatedDatas, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
 
         }
 
     }
+    public class PrecreatedData:ILiquidizable
+    {
+        public string name;
+        public string url;
+        public void ParseEle(XmlNode T)
+        {
+            name = T.Attr("name");
+            url = T.Attr("url");
+
+        }
+
+
+        public object ToLiquid()
+        {
+            return Hash.FromAnonymousObject(new {name=this.name,url=this.url });
+        }
+    }
+
+    public class StoredProc : ILiquidizable
+    {
+        public string name;
+        public string Proc;
+        public List<Column> Columns = new List<Column>();
+
+        public void ParseEle(XmlNode T)
+        {
+            name = T.Attr("name");
+            Proc = T.InnerXml;
+
+
+        }
+
+        public object ToLiquid()
+        {
+            return Hash.FromAnonymousObject(new { name = this.name, Columns = this.Columns });
+        }
+    }
+
+
     public class DataBaseTable:ILiquidizable
     {
         public string name;
@@ -382,7 +435,7 @@ namespace PDA_Engine_Cordova_Con
 
 
         }
-
+       
         public object ToLiquid()
         {
             return Hash.FromAnonymousObject(new {name=this.name ,Columns=this.Columns });
@@ -1769,6 +1822,19 @@ namespace PDA_Engine_Cordova_Con
         }
         public object ToLiquid()
         {
+            if (this.DBSelect2Command != "")
+            {
+              List<inputParameter> ix=new List<inputParameter>();
+                foreach( DBSelectCommandParameter DB in DBSelectCommandParameters)
+                {
+                    ix.Add(new inputParameter(DB.name,"0"));
+
+                }
+
+
+
+                Util.InitCommanD(ref DBSelect2Command, ix, null);
+            }
             return Hash.FromAnonymousObject(new { Icon = this.Icon, CustomHtmls = this.CustomHtmls, ShowCond = this.ShowCond, Width = this.Width, Height = this.Height, AjaxActionChange = this.AjaxActionChange, StaticJavaScriptAfterChange = this.StaticJavaScriptAfterChange, DBSelectCommandParameters = this.DBSelectCommandParameters, DBSelect2Command = this.DBSelect2Command, codeColumn = this.codeColumn, textColumn = this.textColumn, TitleParameter = this.TitleParameter, options = this.options, title = this.title, name = this.name, type = this.type, Caption = this.Caption, linkSyntax = this.linkSyntax, AskMessage = this.AskMessage, AjaxAction = this.AjaxAction, ParameterSyntax = this.ParameterSyntax });
 
         }

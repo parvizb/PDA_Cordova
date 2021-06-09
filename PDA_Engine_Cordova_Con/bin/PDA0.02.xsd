@@ -12160,6 +12160,24 @@ zhihu
             <xs:attribute name="name" type="xs:string" use="required" />
           </xs:complexType>
         </xs:element>
+        <xs:element name="PrecreatedData" maxOccurs="unbounded" >
+          <xs:complexType>
+            <xs:sequence>
+              
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            <xs:attribute name="url" type="xs:string" use="required" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="StoredProc" maxOccurs="unbounded" >
+          <xs:complexType>
+            <xs:sequence>
+              <xs:any maxOccurs="unbounded" minOccurs="0"></xs:any>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" use="required" />
+            
+          </xs:complexType>
+        </xs:element>
         <xs:element name="Include" minOccurs="0" maxOccurs="unbounded" >
           <xs:complexType>
              <xs:annotation><xs:documentation> ترکیب کردن یک فایل config دیگر </xs:documentation> </xs:annotation>
