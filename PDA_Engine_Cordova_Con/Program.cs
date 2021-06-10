@@ -23,7 +23,14 @@ namespace PDA_Engine_Cordova_Con
                 PDAL.BuildApp();
                 Console.WriteLine("App Builded!.");
                 Console.ReadKey();
-         
+                if (XmlValidator.err.Count != 0)
+                {
+                    System.IO.File.WriteAllText(PDAL.MapPath("~\\debug.log"), XmlValidator.output());
+                    Console.WriteLine("There is some error .see in debug.log .");
+                    Console.ReadKey();
+                }
+               
+          
 
                  
 

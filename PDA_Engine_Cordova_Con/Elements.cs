@@ -20,6 +20,20 @@ namespace PDA_Engine_Cordova_Con
 
             return ps;
         }
+        public static string output()
+        {
+            string r = "";
+            foreach(XmlNode n in err.Keys)
+            {
+                r += n.OuterXml + "\r\n" + err[n];
+                r += "\r\n*****";
+
+
+            }
+
+            return r;
+        }
+
         public static List<inputParameter> toInputParameter(this List<ValueParameter> Ps)
         {
             List<inputParameter> ps = new List<inputParameter>();

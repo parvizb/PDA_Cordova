@@ -1,0 +1,344 @@
+<html>
+    <head>
+        <link href="../Res/bootstrap.min.css" rel="stylesheet" />
+        <link href="../Res/bootstrap-rtl.min.css" rel="stylesheet" />
+        <link href="../Res/main.css" rel="stylesheet" />
+<title>
+    گره PageParameter
+</title>
+</head>
+گره
+<h3>
+PageParameter</h3>
+<br />
+ریشه پدر :  <a href="Pages_Page.html" > Page</a>
+<br />
+ پارامتر صفحه 
+<br />
+ویژگی ها
+<table class="table-bordered table table-striped">
+    <thead>
+        
+            <th>
+             نام ویژگی
+            </th>
+            <th>
+             توضیحات
+           </th>
+           <th>
+            نوع 
+          </th>
+          <th>
+            اجبار 
+          </th>
+    </thead>
+
+<tr>
+<td>title</td>
+<td>عنوان نمایشی</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>ChangeBevParameter</td>
+<td>پارامتر تغییر رفتار</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>ExtendedFrom</td>
+<td>از یک عنصر ویژگی ها را ارث ببرد اجزا زیر مجموعه را کپی نمی کند</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>name</td>
+<td>نام</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>CustomControllType</td>
+<td>نوع کنترل سفارشی </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>type</td>
+<td>نوع ورودی </td>
+<td><a href="SimpleType_PageParameterType.html" >PageParameterType</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>ShowCond</td>
+<td>شرایط نمایش پارامتر </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>MaxFileSize</td>
+<td>(کلیوبایت) حداکثر اندازه فایل</td>
+<td><a href="SimpleType_xs:long.html" >xs:long</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>FilePathAtServer</td>
+<td>مسیر پوشه جهت ذخیره بروی سرور</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>LinkSyntax</td>
+<td>نحوه آدرس دهی </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>Width</td>
+<td>اندازه تصویر</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>Hegith</td>
+<td>عرض تصویر</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>PlaceHolder</td>
+<td>متن توضیح که زمانی چیزی در کادر وارد نشده</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>source</td>
+<td>منبع پارامتر چه باشد</td>
+<td><a href="SimpleType_PageParameterSourceType.html" >PageParameterSourceType</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>PutOnAllSpace</td>
+<td>کل فضای ردیف اشغال  کند</td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>sorurceParameter</td>
+<td>پارامتر مربوط به منبع پارامتر</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>dontSendToDb</td>
+<td>منبع پارامتر چه باشد</td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DefaultValueSource</td>
+<td>مقدار پیش فرض از کدام منبع بخواند</td>
+<td><a href="SimpleType_DefaultValueSourceType.html" >DefaultValueSourceType</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>ChangeBev</td>
+<td>در زمان تغییر چه عملی را انجام دهد</td>
+<td><a href="SimpleType_ChangeBevType.html" >ChangeBevType</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DefaultValueParameter</td>
+<td>پارامتر مقدار پیش فرض </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>SaveFileNameExpr</td>
+<td>نام نحو نام گذاری چگونه باشد</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>AjaxActionReturnValuesName</td>
+<td>نام تابعی جهت خواندن مقادیر و نمایش در شروع صفحه بکار می روند برای Select2Ajax چقدر مقداری</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>AjaxActionReturnValuesParameterSyntax</td>
+<td>نحوه صدا زدن تابع</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>AjaxActionReturnValuesValueColumn</td>
+<td>عنوان ستون مقدار</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>AjaxActionReturnValuesTitleColumn</td>
+<td>عنوان ستون نمایشی</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DBSelect2Command</td>
+<td>نام روالی برای کادر های جست و جو ajax بکار گرفته می شود</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DBSelect2CommandDriectValue</td>
+<td>زمانی که یک مقدار مستقیم مقدار دهی میشود</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DBSelect2CommandDriectValueParameterName</td>
+<td>نام پارامتر ارسالی</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>codeColumn</td>
+<td>نام ستون در روال مربوط به جست و جو ajax کادر های جست و جو</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>textColumn</td>
+<td>نام ستون مقدار نمایشی در روال DBSelect2Command</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>Parameter</td>
+<td>در فرم های مقدار ورودی آغازین دارند برای نمایش مقدار نمایشی Select2 از کدام ستون استفاده شود</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>Disabled</td>
+<td>آیا پارامتر غیر فعال باشد</td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>startValueType</td>
+<td>نحوه پر شدن در آغار صفحه تعیین می کند </td>
+<td><a href="SimpleType_startValueType.html" >startValueType</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>TitleParameter</td>
+<td>عنوان پارامتر را مشخص می کند</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+</table>
+
+
+
+<br />
+گره های قابل استفاده در این گره
+<table class="table-bordered table table-striped">
+  <thead>
+      
+          <th>
+           نام گره
+          </th>
+          <th>
+           شرح
+         </th>
+  </thead>
+
+<tr>
+    <td>
+      <a href='PageParameter_CopyElements.html' > CopyElements </a>
+    </td>
+    <td>
+        به کپی برداری اجزای زیر مجموعه عنصر مورد می پردازد
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='PageParameter_Button.html' > Button </a>
+    </td>
+    <td>
+         تعریف دکمه در صفحه
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='PageParameter_option.html' > option </a>
+    </td>
+    <td>
+        
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='PageParameter_ParameterCheck.html' > ParameterCheck </a>
+    </td>
+    <td>
+        اعتبار سنجی صفحه 
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='PageParameter_FileAllow.html' > FileAllow </a>
+    </td>
+    <td>
+        فایل های مجاز جهت
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='PageParameter_DBSelectCommandParameter.html' > DBSelectCommandParameter </a>
+    </td>
+    <td>
+         تعریف پارامتر های مربوط به جست وجو کادر جستو جو Select2 
+    </td>
+</tr>
+</table>
+</html>

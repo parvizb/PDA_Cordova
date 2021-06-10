@@ -1,0 +1,119 @@
+<html>
+    <head>
+        <link href="../Res/bootstrap.min.css" rel="stylesheet" />
+        <link href="../Res/bootstrap-rtl.min.css" rel="stylesheet" />
+        <link href="../Res/main.css" rel="stylesheet" />
+<title>
+    گره Command
+</title>
+</head>
+گره
+<h3>
+Command</h3>
+<br />
+ریشه پدر :  <a href="Page_BatchCommand.html" > BatchCommand</a>
+<br />
+تعریف یک دستور در دسته دستورات 
+<br />
+ویژگی ها
+<table class="table-bordered table table-striped">
+    <thead>
+        
+            <th>
+             نام ویژگی
+            </th>
+            <th>
+             توضیحات
+           </th>
+           <th>
+            نوع 
+          </th>
+          <th>
+            اجبار 
+          </th>
+    </thead>
+
+<tr>
+<td>ExtendedFrom</td>
+<td>از یک عنصر ویژگی ها را ارث ببرد اجزا زیر مجموعه را کپی نمی کند</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>DBCommand</td>
+<td>نام روال بانک اطلاعاتی جهت اجرا </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>Paging</td>
+<td>صفحه بندی فعال باشد </td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>PagingCountCommand</td>
+<td>نام تابعی تعداد کل را نگه می دارد</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>SelectionParameter</td>
+<td>پارامتر گزینش  </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>Selection</td>
+<td>نحوه انتخاب ردیف نسبت انتخاب</td>
+<td><a href="SimpleType_SelectionModeType.html" >SelectionModeType</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>StateMode</td>
+<td>وضعیت ردیف ها</td>
+<td><a href="SimpleType_StateModeType.html" >StateModeType</a></td>
+<td>required</td>
+</tr>  
+</table>
+
+
+
+<br />
+گره های قابل استفاده در این گره
+<table class="table-bordered table table-striped">
+  <thead>
+      
+          <th>
+           نام گره
+          </th>
+          <th>
+           شرح
+         </th>
+  </thead>
+
+<tr>
+    <td>
+      <a href='Command_CopyElements.html' > CopyElements </a>
+    </td>
+    <td>
+        به کپی برداری اجزای زیر مجموعه عنصر مورد می پردازد
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Command_Parameter.html' > Parameter </a>
+    </td>
+    <td>
+        برای دستورات تعریف پارامتر 
+    </td>
+</tr>
+</table>
+</html>

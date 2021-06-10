@@ -1,0 +1,255 @@
+<html>
+    <head>
+        <link href="../Res/bootstrap.min.css" rel="stylesheet" />
+        <link href="../Res/bootstrap-rtl.min.css" rel="stylesheet" />
+        <link href="../Res/main.css" rel="stylesheet" />
+<title>
+    گره Page
+</title>
+</head>
+گره
+<h3>
+Page</h3>
+<br />
+ریشه پدر :  <a href="Application_Pages.html" > Pages</a>
+<br />
+ یک صفحه  
+<br />
+ویژگی ها
+<table class="table-bordered table table-striped">
+    <thead>
+        
+            <th>
+             نام ویژگی
+            </th>
+            <th>
+             توضیحات
+           </th>
+           <th>
+            نوع 
+          </th>
+          <th>
+            اجبار 
+          </th>
+    </thead>
+
+<tr>
+<td>Title</td>
+<td>عنوان </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>HideDefaultButton</td>
+<td>آیا دکمه پیش فرض مخفی شوند </td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>isDailog</td>
+<td>آیا کادر باز می باشد </td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>SerachPrevValuesInBack</td>
+<td>در زمان برگشت به صفحه محتوا جدول براساس آخرین پارامتر ورودی بازیابی شوند</td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>name</td>
+<td>نام</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>link</td>
+<td>لینک صفحه</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>SubmitBev</td>
+<td>رفتاری که پس از ثبت انجام دهد </td>
+<td><a href="SimpleType_SubmitBevType.html" >SubmitBevType</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>SubmitBevParameter</td>
+<td>پارامتر رفتاری که پس از ثبت انجام دهد </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>ColumnCount</td>
+<td>تعداد ستون ها در یک ردیف برای پارامتر ها و دیتال ویو</td>
+<td><a href="SimpleType_xs:unsignedByte.html" >xs:unsignedByte</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>PerKey</td>
+<td>عنوان مجوز مورد نیاز</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>type</td>
+<td>نوع صفحه</td>
+<td><a href="SimpleType_PageType.html" >PageType</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>DBCommand</td>
+<td>دستور مورد نیاز برای نمایش یا اجرا</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>required</td>
+</tr>  
+
+<tr>
+<td>Paging</td>
+<td>صفحه بندی برای نمایش جدول فعال باشد</td>
+<td><a href="SimpleType_YesNo.html" >YesNo</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>PagingCountCommand</td>
+<td>نام روال بانک اطلاعاتی جهت دریافت تعداد کلی رکورد بکار می رود</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>ExtendedFrom</td>
+<td>چه عنصر کپی برداری کند</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>queryString</td>
+<td>تعیین عبارت بایستی به 
+                    /:ParaName/:ParaName2 
+                    باشد
+                  </td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+
+<tr>
+<td>ValueDbCommand</td>
+<td>عنوان روالی که برای مقدار دهی آغازین پارامتر ها بکار می رود مانند دریافت اطلاعات ورودی برای فرم های ویرایش</td>
+<td><a href="SimpleType_xs:string.html" >xs:string</a></td>
+<td>optional</td>
+</tr>  
+</table>
+
+
+
+<br />
+گره های قابل استفاده در این گره
+<table class="table-bordered table table-striped">
+  <thead>
+      
+          <th>
+           نام گره
+          </th>
+          <th>
+           شرح
+         </th>
+  </thead>
+
+<tr>
+    <td>
+      <a href='Page_CustomHtml.html' > CustomHtml </a>
+    </td>
+    <td>
+        
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_CopyElements.html' > CopyElements </a>
+    </td>
+    <td>
+        به کپی برداری اجزای زیر مجموعه عنصر مورد می پردازد
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_ValueParameter.html' > ValueParameter </a>
+    </td>
+    <td>
+        
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_Note.html' > Note </a>
+    </td>
+    <td>
+        
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_table.html' > table </a>
+    </td>
+    <td>
+         یک جدول جهت نمایش  
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_PageParameter.html' > PageParameter </a>
+    </td>
+    <td>
+         پارامتر صفحه 
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_CustomValidate.html' > CustomValidate </a>
+    </td>
+    <td>
+         اعتبار سنجی های سفارشی 
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_Button.html' > Button </a>
+    </td>
+    <td>
+         تعریف دکمه در صفحه
+    </td>
+</tr>
+
+<tr>
+    <td>
+      <a href='Page_BatchCommand.html' > BatchCommand </a>
+    </td>
+    <td>
+        تعریف دسته های دستور  جهت اجرا 
+    </td>
+</tr>
+</table>
+</html>
