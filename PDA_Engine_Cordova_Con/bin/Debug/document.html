@@ -78,7 +78,7 @@ CopyElements
 DynCode و DynNode  <br />
 این دو گره ها هستند پیکربندی نظر به صورت خودکار انجام می دهند
 در اصل وارد تابع ProcessNode می شوند
-باید ویژگی name تعیین باشد 
+باید ویژگی Name تعیین باشد 
  <br />
  DynCode 
  پس از پردازش تبدیل به پیکرندی می شود در فایل ذخیره می شود
@@ -86,6 +86,33 @@ DynCode و DynNode  <br />
 ولی DynNode تغییرات بدون دستکاری فایل پیکرندی انجام  و لحاظ می کند
 
 <BR />
+
+<BR />
+پیکربندی تعبیه شده توسط توسعه دهنده
+<BR />
+تمامی گره ها ذیل نیاز به پارامتر به TableName و Name دارند 
+<br />
+TableName="نام جدول مورد نظر"
+<br />
+Name="DBTable_{{Name}}"
+<br />
+به Name می توان فایل موجود در 
+CodeLigiud\DBTable
+بدون پسوند xml قرار گذشت
+<br />
+BatchPage ایجاد صفحه مدیریت تک صفحه ای<br/>
+BatchToSaveTable ایجاد دستور BatchCommand <br />
+DisplayColumn نمایش همه ستون های یک جدول <br />
+EditParemeters درج به پارامتر ها برای ویرایش در صفحه<br />
+InputColumn درج ستون یک جدول به عنوان ورودی<br />
+InsertPage ایجاد صفحه برای رکورد جدید<br />
+InsertParameters درج ستون یک جدول جهت درج<br />
+MangeRecords ایجاد صفحه نمایش درج ویرایش و حذف برای جدول<br />
+QuickSerachDirectValue ایجاد رویه دریافت اطلاعات مستقیم برای یک جدول برای Select2 <br />
+QuickSerachForSelect2 ایجاد رویه جست جو برای Select2 برای یک جدول <br />
+UpdatePage ایجاد صفحه ویرایش برای یک جدول <br />
+UpdatePageExtended ایجاد صفحه ویرایش با قابلیت ارث بری از صفحه درج<br />
+<br />
 ویژگی ها خاص گره
 <br />
 ExtendedFrom
