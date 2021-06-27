@@ -1,0 +1,12 @@
+
+ {% for col in  Table.Columns -%}
+ {% if col.isPrimary != 'Yes' -%}
+       <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="form" startValueType="DbValueCommand" Parameter="{{col.Name}}">
+        <ParameterCheck Cond="Reg" />
+      </PageParameter>
+  
+  {% else -%}
+   <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="QueryString" startValueType="DbValueCommand" Parameter="{{col.Name}}">
+      </PageParameter>
+  {% endif -%}
+ {% endfor -%}

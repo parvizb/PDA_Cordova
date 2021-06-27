@@ -1,0 +1,7 @@
+<Item text="تعریف پایه" Type="PDALink"><SubItem Icon="user" PerKey="" text="مدیریت مشتریان" Type="PDALink" link="Person_Mgt" /><SubItem Icon="box" PerKey="" text="مدیریت کالا" Type="PDALink" link="Product_mgt" /></Item>
+
+مشخصه link نباید خالی باشد
+*****<Item text="تعریف پایه" Type="PDALink"><SubItem Icon="user" PerKey="" text="مدیریت مشتریان" Type="PDALink" link="Person_Mgt" /><SubItem Icon="box" PerKey="" text="مدیریت کالا" Type="PDALink" link="Product_mgt" /></Item>
+
+مشخصه link نباید خالی باشد
+*****

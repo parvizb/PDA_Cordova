@@ -1,0 +1,15 @@
+<Page Title="{{Table.Caption}} ویرایش" name="{{Table.name}}_Edit" link="{{Table.name}}_Edit" queryString="{% for col in  Table.Columns -%}{% if col.isPrimary == 'Yes' -%}/:{{col.Name}}{% endif -%}{% endfor -%}" ValueDbCommand="#{{Table.name}},SelectAll,{% for col in  Table.Columns -%}{% if col.isPrimary == 'Yes' -%}{{col.Name}},{{col.Name}}{% endif -%}{% endfor -%}" ColumnCount="2" PerKey="{{Table.name}}_Update_Sp" type="ScallerForm" DBCommand="#{{Table.name}},Update{% for col in  Table.Columns -%}{% if col.isPrimary == 'Yes' -%},{{col.Name}},{{col.Name}}{% endif -%}{% endfor -%}">
+ {% for col in  Table.Columns -%}
+    {% if col.isPrimary != 'Yes' -%}
+       <PageParameter  startValueType="DbValueCommand" Parameter="{{col.Name}}"  ExtendedFrom="//Page[@name='{{Table.name}}_Insert']//PageParameter[@name='{{col.Name}}']"  >
+          <CopyElements XPath="//Page[@name='{{Table.name}}_Insert']//PageParameter[@name='{{col.Name}}']" Attr="*"/>
+      </PageParameter>
+      {% else -%}
+      <ValueParameter name="{{col.Name}}" value="{{col.Name}}" source="QueryString" value="{{col.Name}}" >
+      </ValueParameter>
+       <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="QueryString" Parameter="{{col.Name}}">
+         
+      </PageParameter>
+     {% endif -%}
+ {% endfor -%}
+</Page>

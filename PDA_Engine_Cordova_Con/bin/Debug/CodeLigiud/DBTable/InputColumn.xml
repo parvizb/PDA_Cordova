@@ -1,0 +1,8 @@
+
+ {% for col in  Table.Columns -%}
+ {% if col.isPrimary != 'Yes' -%}
+  <column {% if col.DataType == 'Text' -%} type="InputString" {% endif -%} {% if col.DataType == 'REAL' -%} type="InputFloat" {% endif -%}  {% if col.DataType == 'INTEGER' -%} type="InputInteger" {% endif -%}   name="{{col.Name}}" title="{{col.Caption}}" />
+ {% else -%}
+  <column type="DisplayValue" name="{{col.Name}}" title="{{col.Caption}}" />
+ {% endif -%}
+ {% endfor -%}

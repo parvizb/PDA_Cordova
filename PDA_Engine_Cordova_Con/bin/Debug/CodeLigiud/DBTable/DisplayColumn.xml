@@ -1,0 +1,4 @@
+
+ {% for col in  Table.Columns -%}
+  <column type="DisplayValue" name="{{col.Name}}" title="{{col.Caption}}" />
+ {% endfor -%}

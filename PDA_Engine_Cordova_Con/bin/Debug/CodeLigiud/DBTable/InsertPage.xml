@@ -1,0 +1,10 @@
+
+<Page Title="{{Table.Caption}} جدید" name="{{Table.name}}_Insert" link="{{Table.name}}_Insert" ColumnCount="2" PerKey="{{Table.name}}_Insert" type="ScallerForm" DBCommand="#{{Table.name}},Insert">
+ {% for col in  Table.Columns -%}
+ {% if col.isPrimary != 'Yes' -%}
+       <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="form">
+        <ParameterCheck Cond="Reg" />
+      </PageParameter>
+  {% endif -%}
+ {% endfor -%}
+</Page>

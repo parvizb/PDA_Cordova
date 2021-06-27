@@ -1,0 +1,8 @@
+
+ {% for col in  Table.Columns -%}
+ {% if col.isPrimary != 'Yes' -%}
+       <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="form">
+        <ParameterCheck Cond="Reg" />
+      </PageParameter>
+  {% endif -%}
+ {% endfor -%}

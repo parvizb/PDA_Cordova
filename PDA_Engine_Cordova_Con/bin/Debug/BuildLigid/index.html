@@ -77,7 +77,7 @@ window.onerror = function (msg, url, lineNo, columnNo, error) {
             <a   {% if  item.SubItems.size > 0 -%}
              class="dropdown-toggle" data-toggle="dropdown" {% endif -%}
             {% if item.Type== 'Link' or item.Type == 'PDALink'  -%} href="{% if item.Type == 'Link' -%}{{item.link}}{% else -%}#/{{item.link}}{% endif -%}" {% endif -%}
-            {% if item.Type== 'JavaScript'  -%} onclick="{{item.link}}" {% endif -%}
+            {% if item.Type == 'JavaScript'  -%} onclick="{{item.link}}" {% endif -%}
             >
             {% if item.SubItems.size >0 -%}
             <b class="caret"></b>

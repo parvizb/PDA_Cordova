@@ -246,7 +246,7 @@ namespace PDA_Engine_Cordova_Con
 
 
             PDAL.App = this;
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -320,7 +320,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     PrecreatedDatas.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -328,7 +328,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -432,10 +432,11 @@ namespace PDA_Engine_Cordova_Con
     {
         public string name;
         public List<Column> Columns=new List<Column>();
-
+        public string Caption;
         public void ParseEle(XmlNode T)
         {
             name = T.Attr("name");
+            Caption = T.Attr("Caption");
             foreach (XmlNode Z in T.ChildNodes)
             {
                 if (Z.Name == "Column")
@@ -452,7 +453,7 @@ namespace PDA_Engine_Cordova_Con
        
         public object ToLiquid()
         {
-            return Hash.FromAnonymousObject(new {name=this.name ,Columns=this.Columns });
+            return Hash.FromAnonymousObject(new {name=this.name ,Caption=this.Caption,Columns=this.Columns });
         }
     }
     public class Column:ILiquidizable
@@ -487,7 +488,7 @@ namespace PDA_Engine_Cordova_Con
         public List<CommandCustomValidate> CommandCustomValidates = new List<CommandCustomValidate>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -511,7 +512,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     CommandCustomValidates.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -519,7 +520,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -549,7 +550,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Parameter> Parameters = new List<Parameter>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -568,7 +569,7 @@ namespace PDA_Engine_Cordova_Con
 
                     Parameters.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -576,7 +577,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -612,7 +613,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Check> Checks = new List<Check>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -661,7 +662,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Check> Checks = new List<Check>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -682,7 +683,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     Checks.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -690,7 +691,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -729,7 +730,7 @@ namespace PDA_Engine_Cordova_Con
         public string Type;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -738,7 +739,7 @@ namespace PDA_Engine_Cordova_Con
             this.Type = node.Attr("Type");
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -746,7 +747,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -778,7 +779,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Item> Items = new List<Item>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -793,7 +794,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     Items.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -801,7 +802,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -856,7 +857,7 @@ namespace PDA_Engine_Cordova_Con
         public string Icon = "";
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -877,7 +878,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     SubItems.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -885,7 +886,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -931,7 +932,7 @@ namespace PDA_Engine_Cordova_Con
         public string Icon;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1032,7 +1033,7 @@ namespace PDA_Engine_Cordova_Con
         public List<CustomHtml> CustomHtmls = new List<CustomHtml>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1122,7 +1123,7 @@ namespace PDA_Engine_Cordova_Con
                     CustomHtmls.Add(Temp);
 
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -1130,7 +1131,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -1294,7 +1295,7 @@ namespace PDA_Engine_Cordova_Con
         public string For;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1366,7 +1367,7 @@ namespace PDA_Engine_Cordova_Con
         public int ValSize;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1420,7 +1421,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     DBSelectCommandParameters.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -1428,7 +1429,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -1452,7 +1453,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     Buttons.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
 
 
@@ -1495,6 +1496,12 @@ namespace PDA_Engine_Cordova_Con
             {
                 Util.InitCommanD(ref DBSelect2Command, DBSelectCommandParameters.toInputParameter(), null);
             }
+            if (DBSelect2CommandDriectValue != "")
+            {
+                List<inputParameter> t=new List<inputParameter>();
+                t.Add(new inputParameter(DBSelect2CommandDriectValueParameterName,""));
+                Util.InitCommanD(ref DBSelect2CommandDriectValue, t, null);
+            }
 
             return Hash.FromAnonymousObject(new { ValSize = this.ValSize, HerSize = this.HerSize, PutOnAllSpace = this.PutOnAllSpace, CustomControllInitValue = this.CustomControllInitValue, CustomControllhtml = this.CustomControllhtml, CustomControllval = this.CustomControllval, CustomControllgetValue = this.CustomControllgetValue, CustomControllsetValue = this.CustomControllsetValue, AjaxActionReturnValuesName = this.AjaxActionReturnValuesName, AjaxActionReturnValuesParameterSyntax = this.AjaxActionReturnValuesParameterSyntax, AjaxActionReturnValuesTitleColumn = this.AjaxActionReturnValuesTitleColumn, AjaxActionReturnValuesValueColumn = this.AjaxActionReturnValuesValueColumn, SaveFileNameExpr = this.SaveFileNameExpr, DBSelect2CommandDriectValueParameterName = this.DBSelect2CommandDriectValueParameterName, DBSelect2CommandDriectValue = this.DBSelect2CommandDriectValue, ChangeBevParameter = this.ChangeBevParameter, Buttons = this.Buttons, ShowCond = this.ShowCond, ChangeBev = this.ChangeBev, PlaceHolder = this.PlaceHolder, Width = this.Width, Height = this.Height, LinkSyntax = this.LinkSyntax, FileAllows = this.FileAllows, FilePathAtServer = this.FilePathAtServer, MaxFileSize = this.MaxFileSize, Disabled = this.Disabled, dontSendToDb = this.dontSendToDb, options = this.options, TitleParameter = this.TitleParameter, title = this.title, name = this.name, type = this.type, source = this.source, DefaultValueSource = this.DefaultValueSource, DefaultValueParameter = this.DefaultValueParameter, sorurceParameter = this.sorurceParameter, startValueType = this.startValueType, Parameter = this.Parameter, DBSelect2Command = this.DBSelect2Command, codeColumn = this.codeColumn, textColumn = this.textColumn, ParameterChecks = this.ParameterChecks, DBSelectCommandParameters = this.DBSelectCommandParameters });
 
@@ -1517,7 +1524,7 @@ namespace PDA_Engine_Cordova_Con
 
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1542,7 +1549,7 @@ namespace PDA_Engine_Cordova_Con
         public string text;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1582,7 +1589,7 @@ namespace PDA_Engine_Cordova_Con
 
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1633,7 +1640,7 @@ namespace PDA_Engine_Cordova_Con
         public string value;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1660,7 +1667,7 @@ namespace PDA_Engine_Cordova_Con
         public string FileName;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1687,7 +1694,7 @@ namespace PDA_Engine_Cordova_Con
         public string Icon;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1701,7 +1708,7 @@ namespace PDA_Engine_Cordova_Con
             this.Icon = node.Attr("Icon");
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -1709,7 +1716,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -1762,7 +1769,7 @@ namespace PDA_Engine_Cordova_Con
         public List<option> options = new List<option>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1806,7 +1813,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.InnerHtml = node.ChildNodes[i].InnerXml;
                     CustomHtmls.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -1814,7 +1821,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -1862,7 +1869,7 @@ namespace PDA_Engine_Cordova_Con
         public string When;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -1892,7 +1899,7 @@ namespace PDA_Engine_Cordova_Con
         public string source;
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -2003,7 +2010,7 @@ namespace PDA_Engine_Cordova_Con
         public List<Page> _Pages = new List<Page>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -2017,7 +2024,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     _Pages.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -2025,7 +2032,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }
@@ -2090,7 +2097,7 @@ namespace PDA_Engine_Cordova_Con
         public List<NewRecordColumnValue> NewRecordColumnValues = new List<NewRecordColumnValue>();
         public void ParseEle(XmlNode node)
         {
-            string ExtendedFrom = node.Attr("ExtendedFrom");
+            string ExtendedFrom = node.Attr("ExtendedFromFucked");
             if (ExtendedFrom != "")
             {
                 XmlNode X = PDAL.RootElement.SelectSingleNode(ExtendedFrom);
@@ -2130,7 +2137,7 @@ namespace PDA_Engine_Cordova_Con
                     Temp.ParseEle(node.ChildNodes[i]);
                     NewRecordColumnValues.Add(Temp);
                 }
-                if (node.ChildNodes[i].Name == "CopyElements")
+                if (node.ChildNodes[i].Name == "CopyElementsFucked")
                 {
                     XmlNode X = PDAL.RootElement.SelectSingleNode(node.ChildNodes[i].Attr("XPath"));
                     String Attr = node.ChildNodes[i].Attr("Attr");
@@ -2138,7 +2145,7 @@ namespace PDA_Engine_Cordova_Con
                     {
 
                         XmlNode zQ = X.ChildNodes[z].Clone();
-                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElementsFucked"))
                         {
                             node.InsertAfter(zQ, node.ChildNodes[i]);
                         }

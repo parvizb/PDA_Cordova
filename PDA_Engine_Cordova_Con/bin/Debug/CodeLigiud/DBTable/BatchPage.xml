@@ -1,0 +1,58 @@
+ <Page Title="مدیریت {{Table.Caption}}" ColumnCount="1" link="{{Table.name}}_BatchMgt" name="{{Table.name}}_BatchMgt" DBCommand="#{{Table.name}},SelectAll" type="TableView" PerKey="">
+      <table BasicFilter="Yes" Insertable="Yes" RowNumberColumn="Yes" Sortable="Yes">
+       {% for col in  Table.Columns -%}
+ {% if col.isPrimary != 'Yes' -%}
+  <column   {% if col.DataType == 'TEXT' -%} type="InputString" {% endif -%} {% if col.DataType == 'REAL' -%} type="InputFloat" {% endif -%}  {% if col.DataType == 'INTEGER' -%} type="InputInteger" {% endif -%}   name="{{col.Name}}" title="{{col.Caption}}" />
+ {% else -%}
+  <column type="DisplayValue" name="{{col.Name}}" title="{{col.Caption}}" />
+
+ {% endif -%}
+ {% endfor -%}
+<column type="DeleteRow" name="Delete" title="حذف" Caption="حذف" ></column>
+   </table>
+<Button action="InsertRecordToTable" title="ردیف جدید" />
+      <Button action="BatchCommand" actionParameter="Save" title="ذخیره" />
+
+<BatchCommand name="Save" PerKey="">
+ <Command DBCommand="#{{Table.name}},Insert" Selection="All" StateMode="Added">
+ {% for col in  Table.Columns -%}
+    {% if col.isPrimary != 'Yes' -%}
+      <Parameter caption="{{col.Caption}}" name="{{col.Name}}" sourceType="Row" sourceTypeParameter="{{col.Name}}">
+            
+        {% if col.DataType == 'TEXT' -%} <Check Type="ReqString" /> {% else  -%} 
+         <Check Type="ReqNumber" /> 
+        {% endif -%}
+        
+        </Parameter>
+   {% endif -%}
+   {% endfor -%}
+ </Command>
+   <Command DBCommand="#{{Table.name}},Update,{% for col in  Table.Columns -%}{% if col.isPrimary == 'Yes' -%}{{col.Name}},{{col.Name}}{% endif -%}{% endfor -%}" Selection="All" StateMode="Changed">
+ {% for col in  Table.Columns -%}
+    {% if col.isPrimary != 'Yes' -%}
+      <Parameter caption="{{col.Caption}}" name="{{col.Name}}" sourceType="Row" sourceTypeParameter="{{col.Name}}">
+            
+        {% if col.DataType == 'TEXT' -%} <Check Type="ReqString" /> {% else  -%} 
+         <Check Type="ReqNumber" /> 
+        {% endif -%}
+        
+        </Parameter>
+    {% else -%}
+       <Parameter caption="{{col.Caption}}" name="{{col.Name}}" sourceType="Row" sourceTypeParameter="{{col.Name}}">
+        
+        </Parameter>
+   {% endif -%}
+   {% endfor -%}
+ </Command>
+<Command DBCommand="#{{Table.name}},Delete,{% for col in  Table.Columns -%}{% if col.isPrimary == 'Yes' -%}{{col.Name}},{{col.Name}}{% endif -%}{% endfor -%}" Selection="All" StateMode="Deleted">
+ {% for col in  Table.Columns -%}
+    {% if col.isPrimary == 'Yes' -%}
+       <Parameter caption="{{col.Caption}}" name="{{col.Name}}" sourceType="Row" sourceTypeParameter="{{col.Name}}">
+        
+        </Parameter>
+   {% endif -%}
+   {% endfor -%}
+ </Command>
+
+</BatchCommand>
+</Page>

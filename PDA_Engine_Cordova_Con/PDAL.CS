@@ -2316,10 +2316,10 @@ namespace PDA_Engine_Cordova_Con
         }
         public static string ProcessNode(XmlNode Node, string name)
         {
-            if (name == "InsertPage")
+            if (name.StartsWith( "DBTable_" ) )
             {
 
-               Template t= GetTemplate(MapPath("~\\CodeLigiud\\Insert.xml"));
+               Template t= GetTemplate(MapPath("~\\CodeLigiud\\DBTable\\" + name.Substring(name.IndexOf("_"  )+1 ) +".xml"));
                string TableName = Node.Attr("TableName");
                DataBaseTable Dt = null;
                foreach( DataBaseTable D in App.DataBaseTables)
@@ -2331,7 +2331,26 @@ namespace PDA_Engine_Cordova_Con
 
                    }
                }
-             return   t.Render(Hash.FromAnonymousObject(new {Name=TableName,Table=Dt  }));
+               string Rec = "";
+               if (Dt == null)
+               {
+                   throw new Exception(TableName + ":" + "Table Not Found");
+
+               }
+               else
+               {
+                   foreach (Column c in Dt.Columns)
+                   {
+                       if (c.isPrimary == "Yes")
+                       {
+
+                           Rec="{{record."+ c.Name+"}}";
+                       }
+
+                   }
+
+               }
+               return t.Render(Hash.FromAnonymousObject(new { Name = TableName, Table = Dt, Table_RecordKey=Rec }));
             }
 
             return "Error not set";
@@ -2365,10 +2384,30 @@ namespace PDA_Engine_Cordova_Con
                   string name=  x.Attr("Name");
                   string ret = ProcessNode(x, name);
                     XmlDocument Do=new XmlDocument();
-                    Do.LoadXml(ret);
-                    XmlNode te=x.OwnerDocument.ImportNode(Do.ChildNodes[0],true);
-                    x.ParentNode.InsertBefore(te, x);
-                    x.ParentNode.RemoveChild(x);
+                    try
+                    {
+                        Do.LoadXml(ret);
+                        XmlNode te = x.OwnerDocument.ImportNode(Do.ChildNodes[0], true);
+                        x.ParentNode.InsertAfter(te, x);
+                        x.ParentNode.RemoveChild(x);
+                    }
+                    catch
+                    {
+                        Do.LoadXml("<root>" + ret + "</root>");
+                        bool fristnode = true;
+                        XmlNode lastnode = x;
+                        foreach (XmlNode n in Do.ChildNodes[0].ChildNodes)
+                        {
+                            XmlNode te = x.OwnerDocument.ImportNode(n, true);
+                            x.ParentNode.InsertAfter(te, lastnode);
+
+                            lastnode = te;
+
+                        }
+                        x.ParentNode.RemoveChild(x);
+
+
+                    }
                 }
 
             }
@@ -2390,16 +2429,62 @@ namespace PDA_Engine_Cordova_Con
               XList = XmlDoc.SelectNodes("//*");
             foreach (XmlNode x in XList)
             {
+
+                if (x.Name == "CopyElements")
+                {
+                    mustReEval = true;
+                    XmlNode X = PDAL.RootElement.SelectSingleNode(x.Attr("XPath"));
+                    String Attr = x.Attr("Attr");
+                    for (int z = X.ChildNodes.Count - 1; z >= 0; z--)
+                    {
+
+                        XmlNode zQ = X.ChildNodes[z].Clone();
+                        if (((Attr == "*") || (zQ.Name == Attr)) && (zQ.Name != "CopyElements"))
+                        {
+                            x.ParentNode.InsertAfter(zQ, x);
+                        }
+                    }
+
+                }
+                if (x.Attr("ExtendedFrom") != "")
+                {
+                    XmlNode X = PDAL.RootElement.SelectSingleNode(x.Attr("ExtendedFrom"));
+                    PDAL.NodeMerge(X, x);
+                    mustReEval = true;
+
+                }
+
                 if (x.Name == "DynNode")
                 {
                     mustReEval = true;
                     string name = x.Attr("Name");
                     string ret = ProcessNode(x, name);
                     XmlDocument Do = new XmlDocument();
-                    Do.LoadXml(ret);
-                    XmlNode te = x.OwnerDocument.ImportNode(Do.ChildNodes[0], true);
-                    x.ParentNode.InsertBefore(te, x);
-                    x.ParentNode.RemoveChild(x);
+                    try
+                    {
+                        Do.LoadXml(ret);
+                        XmlNode te = x.OwnerDocument.ImportNode(Do.ChildNodes[0], true);
+                        x.ParentNode.InsertAfter(te, x);
+                        x.ParentNode.RemoveChild(x);
+                    }
+                    catch
+                    {
+                        Do.LoadXml("<root>" + ret + "</root>");
+                        bool fristnode = true;
+                        XmlNode lastnode=x;
+                        foreach (XmlNode n in Do.ChildNodes[0].ChildNodes)
+                        {
+                            XmlNode te = x.OwnerDocument.ImportNode(n, true);
+                            x.ParentNode.InsertAfter(te,lastnode);
+
+                            lastnode = te;
+
+                        }
+                        x.ParentNode.RemoveChild(x);
+
+
+                    }
+                    
                 }
 
             }

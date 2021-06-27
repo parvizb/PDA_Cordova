@@ -1,0 +1,15 @@
+ <StoredProc name="{{Table.name}}_Direct">
+   {% assign i = 0 -%}
+    Select    {% for col in  Table.Columns -%}   
+        {% assign i = i | plus:1 -%}
+        {% if i != 1 -%} || ' ' || {% endif -%}
+      {% if col.DataType == 'TEXT' -%}{{col.Name}}  {% else -%}  CAST( {{col.Name}} AS TEXT   ){% endif -%}{% endfor -%} title 
+         from {{Table.name}} where 
+         {% assign i = 0 -%}
+          {% for col in  Table.Columns -%}
+          {% if col.isPrimary == 'Yes' -%}
+            {{col.Name }}= @key
+          {% endif -%}
+          {% endfor -%}
+       
+     </StoredProc>

@@ -12181,6 +12181,11 @@ zhihu
               <xs:annotation>
                 <xs:documentation>نام جدول </xs:documentation> </xs:annotation>
             </xs:attribute>
+            <xs:attribute name="Caption" type="xs:string" use="required" >
+              <xs:annotation>
+                <xs:documentation>نام فارسی  جدول </xs:documentation>
+              </xs:annotation>
+            </xs:attribute>
           </xs:complexType>
         </xs:element>
         <xs:element name="PrecreatedData" maxOccurs="unbounded" >
