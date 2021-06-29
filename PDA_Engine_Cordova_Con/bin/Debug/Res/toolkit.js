@@ -1734,3 +1734,22 @@ function ReadJsonToSendData(url,dataTable,clearTable)
  x.send();
 }
 
+function CheckDataBase()
+{
+
+  for(var i=0;i<Tables.length;i++)
+  {
+   temp=Tables[i];
+    for(var j=0;j<temp.Columns.length;j++)
+    {
+        var p=new Array();
+        var f=function(){};
+        var n=function(){};
+     Scaller("ALTER TABLE " + temp.name  +  " ADD COLUMN "  + temp.Columns[j].Name  + " " + temp.Columns[j].DataType , p, f  , n );
+    }
+
+
+  }
+
+
+}

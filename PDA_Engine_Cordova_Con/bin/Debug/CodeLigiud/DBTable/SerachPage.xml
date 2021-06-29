@@ -1,0 +1,18 @@
+<Page DBCommand="{{Table.Name}}_Serach" ColumnCount="2" link="{{Table.Name}}_Serach" name="{{Table.Name}}_Serach" PerKey="" Title="مدیریت {{Table.Caption}}" type="TableView" >
+       <table BasicFilter="Yes" RowNumberColumn="Yes" Sortable="Yes"   >
+          {% for col in  Table.Columns -%}
+  <column type="DisplayValue" name="{{col.Name}}" title="{{col.Caption}}" />
+ {% endfor -%}
+        <column type="PDALink" name="edit" title="ویرایش" Caption="ویرایش" Icon="edit"  linkSyntax="{{Table.Name}}_Edit/{{Table_RecordKey}}"></column>
+         <column type="PDALink" name="Delete" title="حذف " Caption="حذف " Icon="brush" linkSyntax="{{Table.Name}}_Delete/{{Table_RecordKey}}"></column>
+      
+       </table>
+      <Button  action="goToPage" title="جدید" actionParameter="{{Table.Name}}_Insert" Icon="plus"  />
+  {% for col in  Table.Columns -%}
+       <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer"  DefaultValueSource="Static" DefaultValueParameter="-1" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float"  DefaultValueSource="Static" DefaultValueParameter="-1" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="form">
+        
+      </PageParameter>
+   
+ {% endfor -%}
+</Page>
+ 

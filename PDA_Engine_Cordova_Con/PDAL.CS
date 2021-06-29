@@ -2633,7 +2633,7 @@ namespace PDA_Engine_Cordova_Con
                     script +=C.Name  + " " + C.DataType  + (C.isPrimary  == "Yes" ? " PRIMARY KEY " : " ") + " ";
 
                 }
-                script += ")',[],function(){}, function(ex,ey){ alert(ey.message);} );\r\n";
+                script += ")',[],function(){}, function(ex,ey){ alert(ey.message);} );\r\n;setTimeout(CheckDataBase,2000);";
             }
             script += "\r\n });\r\n";
             File.WriteAllText(MapPath("~\\Output\\dbCreate.js"), script);
@@ -2672,9 +2672,24 @@ namespace PDA_Engine_Cordova_Con
                 }
 
             }
-             Bs.Append("}");
-            File.WriteAllText(MapPath("~\\output\\batchinfo.js"), Bs.ToString());
+             Bs.Append("}\r\n");
+             Bs.AppendLine("Tables=new Array();");
+             foreach (DataBaseTable Dt in App.DataBaseTables)
+             {
+                 Bs.AppendLine("var z=" + JsonConvert.SerializeObject(Dt) + " ;\r\nTables.push(z); ");
 
+             }
+
+            File.WriteAllText(MapPath("~\\output\\batchinfo.js"), Bs.ToString());
+           FileInfo[]  Fi = new DirectoryInfo(MapPath("~\\CustomRes")).GetFiles();
+            foreach(FileInfo z in Fi)
+            {
+                IncludeRes r = new IncludeRes();
+                r.src = z.Name;
+                r.type = z.Extension.Substring(1).ToLower();
+                App.IncludeRess.Add(r);
+
+            }
             BuildFile(MapPath("~\\BuildLigid\\index.html"), MapPath("~\\output\\index.html"));
            
         }
@@ -2727,24 +2742,50 @@ namespace PDA_Engine_Cordova_Con
             System.IO.Directory.CreateDirectory(MapPath("~\\Output\\Builded\\Scripts\\controllers"));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("OK!");
-            string[] folderToCopy = {"Res","webfonts","fonts" ,"tinymce","PrecreatedJsonData","images"};
+            string[] folderToCopy = { "Res", "webfonts", "fonts", "tinymce", "PrecreatedJsonData", "images", "CustomRes" };
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("Copying Resource:");
             foreach (string r in folderToCopy)
             {
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.Write("Copying Folder  =>" + r +":" );
+                Console.Write("Copying Folder  =>" + r + ":");
                 Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(MapPath("~\\" + r), MapPath("~\\Output\\" + r));
 
 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("OK!");
             }
+            
 
-    
             BuildScripts();
             BuildPages();
-            
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("DirectCopyToOutput:");
+            DirectoryInfo[] Di = new DirectoryInfo(MapPath("~\\DirectCopyToOutput")).GetDirectories();
+            foreach (DirectoryInfo D in Di)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Copying Folder  =>" + D.Name + ":");
+                Microsoft.VisualBasic.FileIO.FileSystem.CopyDirectory(D.FullName, MapPath("~\\Output\\" + D.Name), true);
+
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("OK!");
+
+            }
+            FileInfo[] Fi = new DirectoryInfo(MapPath("~\\DirectCopyToOutput")).GetFiles();
+            foreach (FileInfo F in Fi)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.Write("Copying File  =>" + F.Name + ":");
+                Microsoft.VisualBasic.FileIO.FileSystem.CopyFile(F.FullName, MapPath("~\\Output\\" + F.Name), true);
+
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("OK!");
+
+            }
+          
         }
     }
 }

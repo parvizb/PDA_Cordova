@@ -241,6 +241,7 @@ namespace PDA_Engine_Cordova_Con
         public List<PrecreatedData> PrecreatedDatas = new List<PrecreatedData>();
         public List<DataBaseTable> DataBaseTables = new List<DataBaseTable>();
         public List<StoredProc> StoredProcs = new List<StoredProc>();
+        public List<IncludeRes> IncludeRess = new List<IncludeRes>();
         public void ParseEle(XmlNode node)
         {
 
@@ -384,7 +385,7 @@ namespace PDA_Engine_Cordova_Con
         }
         public object ToLiquid()
         {
-            return Hash.FromAnonymousObject(new { PrecreatedDatas = this.PrecreatedDatas, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
+            return Hash.FromAnonymousObject(new { PrecreatedDatas = this.PrecreatedDatas, IncludeRess = this.IncludeRess, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
 
         }
 
@@ -992,7 +993,16 @@ namespace PDA_Engine_Cordova_Con
         }
 
     }
+    public class IncludeRes : ILiquidizable
+    {
+        public string src = "";
+        public string type = "";
 
+        public object ToLiquid()
+        {
+           return Hash.FromAnonymousObject(new {src=this.src,type=this.type});
+        }
+    }
 
 
     public class Page : ILiquidizable
@@ -1067,7 +1077,15 @@ namespace PDA_Engine_Cordova_Con
                     PageParameter Temp = new PageParameter();
                     Temp.ParseEle(node.ChildNodes[i]);
                     PageParameters.Add(Temp);
-                    DicPageParameters.Add(Temp.name, Temp);
+                    if (Temp.name != "")
+                    {
+                        DicPageParameters.Add(Temp.name, Temp);
+                    }
+                    else
+                    {
+                         
+
+                    }
                     if ((Temp.source == "form") && (Temp.dontSendToDb != "Yes"))
                     {
                         NoneFormParameters = true;

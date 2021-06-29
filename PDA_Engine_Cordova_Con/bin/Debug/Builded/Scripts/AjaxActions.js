@@ -1,1 +1,0 @@
-﻿var AjaxActions = new Object();
