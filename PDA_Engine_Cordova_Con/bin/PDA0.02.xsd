@@ -12284,7 +12284,11 @@ zhihu
           <xs:documentation>قالب مورد استفاده</xs:documentation>
         </xs:annotation>
       </xs:attribute>
-     
+      <xs:attribute name="DefaultPage" type="xs:string" use="optional">
+        <xs:annotation>
+          <xs:documentation>نام صفحه پیشفرض</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
       <xs:attribute name="CopyRightMessage" type="xs:string" use="optional">
         <xs:annotation>
           <xs:documentation>متن کپی رایت</xs:documentation>

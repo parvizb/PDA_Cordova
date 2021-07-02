@@ -40,8 +40,10 @@
       'Column: ' + columnNo,
       'Error object: ' + JSON.stringify(error)
     ].join(' - ');
-
+    if(message.indexOf('http://errors.angularjs.org')==-1)
+     {
     alert(message);
+    }
   }
 
   return false;
@@ -141,13 +143,11 @@
     <script src="Builded/Scripts/AjaxActions.js"></script>
 
       {%  for pages in App.Pagess -%}
-     
+       
       {% for   Page in pages.Pages -%}
-       
-      {% if Page.isDailog=='Yes'  -%}
-       
       
-        <div class="modal fade" id="mdl@(Page.name)" isDailog="yes" PageName="@(Page.name)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      {% if Page.isDailog == 'Yes'  -%}        
+        <div class="modal fade" id="mdl{{Page.name}}" isDailog="yes" PageName="{{Page.name}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
@@ -166,9 +166,7 @@
           </div>
           <!-- /.modal -->
         </div>
-
-
-    {% endif -%}
+     {% endif -%}
     {% endfor -%}
     {% endfor -%}
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -333,7 +331,10 @@
          {% for  x in App.PrecreatedDatas -%}
          ReadJsonToSendData('PrecreatedJsonData/{{x.url}}','{{x.name}}',false);
          {%endfor -%}
-
+         {% if App.DefaultPage !='' -%}
+         goToLink('#/{{App.DefaultPage}}')
+         {% endif -%}
+         
         </script>
       </body>
   <script>

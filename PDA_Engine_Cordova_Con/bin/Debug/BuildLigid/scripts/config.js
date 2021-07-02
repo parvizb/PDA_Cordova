@@ -484,10 +484,14 @@ function ($routeProvider/*, $locationProvider*/) {
     {% endif -%}
     {% endfor -%}
     {% endfor -%}
-    when('/welcome', {
+    when('/', {
+        {% if App.DefaultPage =='' -%}
         templateUrl: 'welcome.html',
         controller: 'mainController'}
-    
+        {% else -%}
+        templateUrl: 'Builded/Pages/{{App.DefaultPage}}.html',
+        controller: 'mainController'}
+        {% endif -%}
     );
 }]);
 

@@ -1,0 +1,7 @@
+[
+ {"CatId":"1","CatName":"مواد غذایی"},{"CatId":"2","CatName":"پوشاک"} ,{"CatId":"3","CatName":"قبوض"},
+ {"CatId":"4","CatName":"تفریح"},{"CatId":"5","CatName":"اقساط"},{"CatId":"6","CatName":"بدهی"} , 
+ {"CatId":"6","CatName":"تعمیرات"}, {"CatId":"7","CatName":"بهداشتی"} ,{"CatId":"8","CatName":"مصرفی"}
+ ,{"CatId":"9","CatName":"خرید وسایل"},{"CatId":"10","CatName":"سایر"}
+
+]

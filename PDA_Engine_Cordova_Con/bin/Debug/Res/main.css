@@ -151,7 +151,7 @@ width:100%;
     left: -9999em;
   }
   .DataTable tr[spec]{
-    border: 1px solid #0a0a0a;
+    
     display: block;
   }
   .DataTable tr[spec] + tr[spec] {
@@ -171,7 +171,7 @@ width:100%;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
-    border-bottom: 1px solid #0a0a0a;
+     
     padding-left: 0%;
     position: relative;
   }
@@ -191,7 +191,7 @@ width:100%;
     text-align:left;
     position: relative;
     z-index: 1;
-    border-left:1px solid;
+     
     padding:1px;
   }
   

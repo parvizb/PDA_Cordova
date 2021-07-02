@@ -710,7 +710,18 @@ function toInput(key, value,isstring) {
     }
     return obj;
 }
+function startEditMoney(e)
+{
+e.value=parseInt( AllReplace(e.value, ",", ""));
+e.type="Number";
 
+}
+function endEditMoney(e)
+{
+e.type="text"
+e.value= addCommas(e.value);
+
+}
 function ConfirmAsk(message, strFun) {
     $('#myModalLabel').html('تایید');
     $('.modal-body').html(message);
@@ -966,7 +977,7 @@ function goToLink(link) {
     document.body.appendChild(d);
     d.click();
 
-    document.removeChild(d);
+    document.body.removeChild(d);
 }
 
 function getDailOpen() {
@@ -1210,8 +1221,16 @@ function SetupDlgScope() {
         var s= (typeof currentScope[p] === 'function') ;
         if(s==true)
             {
-            dlgScope[p] = currentScope[p];
+                try
+                {
+                    dlgScope[p] = currentScope[p];
 
+                }
+                catch
+                {
+
+                    
+                }
         }
     }));
 

@@ -216,7 +216,7 @@ namespace PDA_Engine_Cordova_Con
         public string Name;
         public string Debug;
         public string PreventCache;
-
+        public string DefaultPage;
         public string ConnectionSetthing;
         /// <summary>
         /// تم را مشخص می کند
@@ -264,6 +264,7 @@ namespace PDA_Engine_Cordova_Con
             this.ConnectionSetthing = node.Attr("ConnectionSetthing");
             this.PreventCache = node.Attr("PreventCache");
             this.Theme = node.Attr("Theme");
+            this.DefaultPage = node.Attr("DefaultPage");
             for (int i = 0; i < node.ChildNodes.Count; i++)
             {
                 if (node.ChildNodes[i].Name == "Menu")
@@ -385,7 +386,7 @@ namespace PDA_Engine_Cordova_Con
         }
         public object ToLiquid()
         {
-            return Hash.FromAnonymousObject(new { PrecreatedDatas = this.PrecreatedDatas, IncludeRess = this.IncludeRess, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
+            return Hash.FromAnonymousObject(new {DefaultPage=this.DefaultPage ,PrecreatedDatas = this.PrecreatedDatas, IncludeRess = this.IncludeRess, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
 
         }
 
@@ -1158,7 +1159,17 @@ namespace PDA_Engine_Cordova_Con
             }
             string DBComParaUsage = "";/* PDASys.CreateParameterUsage(DBCommand);*/
             int h = 0, v = 0;
-            switch (int.Parse(this.ColumnCount))
+            int zx=0;
+            try
+            {
+               zx= int.Parse(this.ColumnCount);
+
+            }
+            catch
+            {
+                zx=1;
+            }
+            switch (zx)
             {
                 case 1:
                     h = 3;
