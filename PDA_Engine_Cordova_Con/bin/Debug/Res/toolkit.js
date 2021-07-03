@@ -181,7 +181,7 @@ function Ajax(pageName, Mehtod, jData, fnOk, fnFail) {
         var setup = Select2Prop(data.PageName, (Mehtod == "Select2Ajax" ? data.ParaName : data.colname), (Mehtod != "Select2Ajax"));
         ReadTable(setup.Command, data.Parameters, function (da) {
             var results = new Array();
-            for (var q = 0; q < setup.options; q++) {
+            for (var q = 0; q < setup.options.length; q++) {
                 results.push(setup.options[q]);
             }
             var relData = JSON.parse(da.retrunValue);
@@ -231,9 +231,13 @@ function ConvertBit(val) {
 
 }
 function NorDate(date) {
-
+   
     var parts = date.split('/');
+    if(parts.length==3)
+    {
     return PadLeft(parts[0], 4) + "/" + PadLeft(parts[1], 2) + "/" + PadLeft(parts[2], 2);
+    }
+    return date;
 }
  
 
@@ -253,14 +257,21 @@ function SetDefaultValue(paras,key, defaultVale) {
     }
     else
     {
-        if (!(paras[index].value.toString() !="")) {
+        if(paras[index].value == null)
+        {
+            paras[index].value = defaultVale;
+        }
+        if ((paras[index].value.toString() =="")) {
             paras[index].value = defaultVale;
 
         }
+        if(isNaN(defaultVale)==false)
+        {
         if ( isNaN(  paras[index].value )==true) {
             paras[index].value = defaultVale;
 
         }
+    }
     }
 
 }

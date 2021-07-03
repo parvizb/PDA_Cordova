@@ -400,7 +400,7 @@ Entity.Parameters.push( toInput('{{para.name}}',{% if para.sorurceParameter == '
 {% endif -%}
 {% endfor -%}
 }
-
+if(dataP==undefined){
 {% for para in  Page.PageParameters -%}
 
 p='{{para.DefaultValueSource}}'
@@ -419,7 +419,7 @@ SetDefaultValue(Entity.Parameters,'{{para.name}}',null);
 
  
 {% endfor -%}
-
+}
 TableViewAjax('getTableViewRecords',(dataP!==undefined?dataP: Entity),function(data){
           
     currentScope.{{Page.name}}records= data.records;

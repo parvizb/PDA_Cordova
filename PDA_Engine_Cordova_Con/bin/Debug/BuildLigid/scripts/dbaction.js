@@ -76,7 +76,7 @@ function Select2Prop(pagename,name,istable)
             obj.textcol='{{para.textColumn}}';
             obj.DirectParameterName='{{para.DBSelect2CommandDriectValueParameterName}}';
             {% for op in para.options %}
-            obj.options.push( { id:"{{op.value}}",text="{{op.text}}"  });
+            obj.options.push( { id:"{{op.value}}",text:"{{op.text}}"  });
             {% endfor -%}
             return obj;
         }
@@ -92,7 +92,7 @@ function Select2Prop(pagename,name,istable)
             obj.idcol='{{col.codeColumn}}';
             obj.textcol='{{col.textColumn}}';
             {% for op in col.options %}
-            obj.options.push( { id:"{{op.value}}",text="{{op.text}}"  });
+            obj.options.push( { id:"{{op.value}}",text:"{{op.text}}"  });
             {% endfor -%}
             return obj;
         } 
