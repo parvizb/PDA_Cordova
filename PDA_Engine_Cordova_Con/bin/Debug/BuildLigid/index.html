@@ -102,7 +102,7 @@
               {% for  mitem in  item.SubItems -%}
              <li>
               <a
-                    {%  if  mitem.Type=='Link' or  mitem.Type =='PDALink' -%} href="{% if mitem.Type=='Link' -%}{{mitem.link}}{% else -%}#/{{mitem.link}}{% endif -%}" {% endif -%}
+                    {%  if  mitem.Type== 'Link' or  mitem.Type == 'PDALink' -%} href="{% if mitem.Type == 'Link' -%}{{mitem.link}}{% else -%}#/{{mitem.link}}{% endif -%}" {% endif -%}
                {% if mitem.Type='JavaScript'  -%} onclick="mitem.link" {% endif -%}
                   >
                 {% if mitem.Icon!= '' -%}

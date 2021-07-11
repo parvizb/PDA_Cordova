@@ -22,6 +22,7 @@ namespace PDA_Engine_Cordova_Con
                 PDAL.load();
                 PDAL.BuildApp();
                 Console.WriteLine("App Builded!.");
+                System.Diagnostics.Process.Start(PDAL.MapPath("~\\Autorun.bat"));
                 Console.ReadKey();
                 if (XmlValidator.err.Count != 0)
                 {

@@ -5,7 +5,7 @@
         <ParameterCheck Cond="Reg" />
       </PageParameter>
       {% else -%}
-      <ValueParameter name="{{col.Name}}" value="{{col.Name}}" source="QueryString"  value="{{col.Name}}">
+      <ValueParameter name="{{col.Name}}" value="{{col.Name}}" source="QueryString"   >
       </ValueParameter>
        <PageParameter {% if col.DataType == 'TEXT' -%} type="String" {% endif -%} {% if col.DataType == 'INTEGER' -%} type="Integer" {% endif -%} {% if col.DataType == 'REAL' -%} type="Float" {% endif -%} name="{{col.Name}}" title="{{col.Caption}}" source="QueryString" Parameter="{{col.Name}}">
          

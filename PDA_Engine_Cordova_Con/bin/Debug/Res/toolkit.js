@@ -287,9 +287,14 @@ function PadLeft(v, len) {
     return t + v;
 }
 
-
+var tempfun =null;
 function Scaller(command,parameters,fnOk,fnFail) {
-
+    if(command.startsWith("$"))
+    {
+       eval( "tempfun=" + command.substr(1)  );
+       tempfun( parameters, fnOk, fnFail);
+       return ;
+    }
     var com = command;
     for (var i = 0; i < parameters.length; i++) {
         com = AllReplace(com, "@" + parameters[i].key, "'" + parameters[i].value + "'");
@@ -312,6 +317,14 @@ function Scaller(command,parameters,fnOk,fnFail) {
     });
 }
 function ReadTable(command, parameters, fnOk, fnFail) {
+ if(command.startsWith("$"))
+ {
+    eval( "tempfun=" + command.substr(1)  );
+    tempfun( parameters, fnOk, fnFail);
+    return ;
+ }
+
+
 
     var com = command;
     for (var i = 0; i < parameters.length; i++) {

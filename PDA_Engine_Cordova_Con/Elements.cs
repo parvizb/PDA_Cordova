@@ -216,6 +216,7 @@ namespace PDA_Engine_Cordova_Con
         public string Name;
         public string Debug;
         public string PreventCache;
+       
         public string DefaultPage;
         public string ConnectionSetthing;
         /// <summary>
@@ -386,6 +387,7 @@ namespace PDA_Engine_Cordova_Con
         }
         public object ToLiquid()
         {
+            
             return Hash.FromAnonymousObject(new {DefaultPage=this.DefaultPage ,PrecreatedDatas = this.PrecreatedDatas, IncludeRess = this.IncludeRess, Notifactions = this.Notifactions, CopyRightMessage = this.CopyRightMessage, Theme = this.Theme, Title = this.Title, Version = this.Version, Name = this.Name, ConnectionSetthing = this.ConnectionSetthing, Menus = this.Menus, Pagess = this.Pagess, Actionss = this.Actionss });
 
         }

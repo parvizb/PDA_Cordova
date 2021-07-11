@@ -130,21 +130,25 @@ $(obj).attr('disabled',false);
     Entity.PageName='{{Page.name}}';
     Entity.Parameters=new Array();
     {% for para in  Page.PageParameters -%}
+    {% if (para.source == 'Expr') -%}
+    Entity.Parameters.push( toInput('{{para.name}}', {{Para.sorurceParameter}} ) );
+    {% endif -%}
     {% if para.source == 'form' -%}
     p='{{para.type}}';
     {% if (para.type == 'Html') -%}
     Entity.Parameters.push( toInput('{{para.name}}',tinymce.editors['txt{{Page.name}}{{para.name}}'].contentDocument.body.innerHTML));
-    
+   
     {% elseif (para.type == 'CustomControll') -%}
     Entity.Parameters.push( toInput('{{para.name}}', {{Para.CustomControllgetValue}} ) );
+    {% elseif (para.type == 'DisplayExprMoney') -%}
+    Entity.Parameters.push( toInput('{{para.name}}',$('#txt{{Page.name}}{{para.name}}').val() ,false) );
     {% elseif (para.type == 'Money') -%}
     Entity.Parameters.push( toInput('{{para.name}}',$('#txt{{Page.name}}{{para.name}}').val() ,false) );
     {% elseif (para.type == 'CheckBox') -%}
     Entity.Parameters.push( toInput('{{para.name}}',ConvertBit( $('#txt{{Page.name}}{{para.name}}').val() ) ,false) );
     {% elseif (para.type == 'Integer') -%}
     Entity.Parameters.push( toInput('{{para.name}}', $('#txt{{Page.name}}{{para.name}}').val() ,false) );
-    {% elseif (para.source == 'Expr') -%}
-    Entity.Parameters.push( toInput('{{para.name}}', {{Para.sorurceParameter}} ) );
+   
     {% elseif (para.type == 'Date') -%}
     Entity.Parameters.push( toInput('{{para.name}}',  NorDate($('#txt{{Page.name}}{{para.name}}').val())  ) );
     
@@ -369,18 +373,24 @@ ScallerAjax('ScallerSubmit',Entity,function(data){
     Entity.PageName='{{Page.name}}';
     Entity.Parameters=new Array();
     {% for para in  Page.PageParameters -%}
+    {% if (para.source == 'Expr') -%}
+    Entity.Parameters.push( toInput('{{para.name}}', {{Para.sorurceParameter}} ) );
+    {% endif -%}
+
+
     {% if para.source == 'form' -%}
     {% if (para.type == 'Html') -%}
     Entity.Parameters.push( toInput('{{para.name}}',tinymce.editors['txt{{Page.name}}{{para.name}}'].contentDocument.body.innerHTML));
     
     {% elseif (para.type == 'CustomControll') -%}
     Entity.Parameters.push( toInput('{{para.name}}', {{Para.CustomControllgetValue}} ) );
+    {% elseif (para.type == 'DisplayExprMoney') -%}
+    Entity.Parameters.push( toInput('{{para.name}}',$('#txt{{Page.name}}{{para.name}}').val() ,false) );
     {% elseif (para.type == 'Money') -%}
     Entity.Parameters.push( toInput('{{para.name}}',$('#txt{{Page.name}}{{para.name}}').val() ,false) );
     {% elseif (para.type == 'Integer') -%}
     Entity.Parameters.push( toInput('{{para.name}}', $('#txt{{Page.name}}{{para.name}}').val() ,false) );
-    {% elseif (para.source == 'Expr') -%}
-    Entity.Parameters.push( toInput('{{para.name}}', {{Para.sorurceParameter}} ) );
+    
     {% elseif (para.type == 'Date') -%}
     Entity.Parameters.push( toInput('{{para.name}}',  NorDate($('#txt{{Page.name}}{{para.name}}').val())  ) );
     {% elseif (para.type == 'CheckBox') -%}
