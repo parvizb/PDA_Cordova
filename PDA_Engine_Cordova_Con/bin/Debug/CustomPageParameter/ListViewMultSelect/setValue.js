@@ -1,0 +1,1 @@
+{{Page.Name}}{{PageParameter.name}}_setValue(  data.records[0].{{PageParameter.Parameter}})

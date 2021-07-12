@@ -1,0 +1,28 @@
+<select multiple id='txt{{Page.Name}}{{PageParameter.name}}'  >
+    {% for o in PageParameter.options -%}
+    <option  value="{{o.value}}">{{o.text}}</option>
+    {% endfor -%}
+</select>
+<script>
+     function {{Page.Name}}{{PageParameter.name}}_value()
+     {
+       var t= $('#txt{{Page.Name}}{{PageParameter.name}}').val();
+       var r="";
+       for(var i=0;i<t.length;i++)
+       { 
+        r+='[' ,t[i], ']';
+
+       }
+       returb r;
+     }
+     function {{Page.Name}}{{PageParameter.name}}_setValue(val)
+     {
+         val =AllReplace(val,'[','')
+         var spr=val.split(']');
+         $('#txt{{Page.Name}}{{PageParameter.name}}').val(spr);
+
+
+     }
+
+
+</script>

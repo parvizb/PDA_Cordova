@@ -1078,7 +1078,14 @@ namespace PDA_Engine_Cordova_Con
                 if (node.ChildNodes[i].Name == "PageParameter")
                 {
                     PageParameter Temp = new PageParameter();
+                   
                     Temp.ParseEle(node.ChildNodes[i]);
+                    Temp.ParentPage = this;
+                    if (Temp.CustomControllType != "")
+                    {
+                        Temp.GenCustomControll(Temp.CustomControllType);
+
+                    }
                     PageParameters.Add(Temp);
                     if (Temp.name != "")
                     {
@@ -1396,6 +1403,7 @@ namespace PDA_Engine_Cordova_Con
         public string PutOnAllSpace = "";
         public int HerSize;
         public int ValSize;
+        public Page ParentPage;
         public void ParseEle(XmlNode node)
         {
             string ExtendedFrom = node.Attr("ExtendedFromFucked");
@@ -1490,10 +1498,7 @@ namespace PDA_Engine_Cordova_Con
 
                 }
             }
-            if (CustomControllType != "")
-            {
-                GenCustomControll(CustomControllType);
-            }
+           
             if (PDAL.App.Debug == "Yes")
             {
                 if (source == "form")
@@ -1533,13 +1538,22 @@ namespace PDA_Engine_Cordova_Con
                 t.Add(new inputParameter(DBSelect2CommandDriectValueParameterName,""));
                 Util.InitCommanD(ref DBSelect2CommandDriectValue, t, null);
             }
-
+          
             return Hash.FromAnonymousObject(new { ValSize = this.ValSize, HerSize = this.HerSize, PutOnAllSpace = this.PutOnAllSpace, CustomControllInitValue = this.CustomControllInitValue, CustomControllhtml = this.CustomControllhtml, CustomControllval = this.CustomControllval, CustomControllgetValue = this.CustomControllgetValue, CustomControllsetValue = this.CustomControllsetValue, AjaxActionReturnValuesName = this.AjaxActionReturnValuesName, AjaxActionReturnValuesParameterSyntax = this.AjaxActionReturnValuesParameterSyntax, AjaxActionReturnValuesTitleColumn = this.AjaxActionReturnValuesTitleColumn, AjaxActionReturnValuesValueColumn = this.AjaxActionReturnValuesValueColumn, SaveFileNameExpr = this.SaveFileNameExpr, DBSelect2CommandDriectValueParameterName = this.DBSelect2CommandDriectValueParameterName, DBSelect2CommandDriectValue = this.DBSelect2CommandDriectValue, ChangeBevParameter = this.ChangeBevParameter, Buttons = this.Buttons, ShowCond = this.ShowCond, ChangeBev = this.ChangeBev, PlaceHolder = this.PlaceHolder, Width = this.Width, Height = this.Height, LinkSyntax = this.LinkSyntax, FileAllows = this.FileAllows, FilePathAtServer = this.FilePathAtServer, MaxFileSize = this.MaxFileSize, Disabled = this.Disabled, dontSendToDb = this.dontSendToDb, options = this.options, TitleParameter = this.TitleParameter, title = this.title, name = this.name, type = this.type, source = this.source, DefaultValueSource = this.DefaultValueSource, DefaultValueParameter = this.DefaultValueParameter, sorurceParameter = this.sorurceParameter, startValueType = this.startValueType, Parameter = this.Parameter, DBSelect2Command = this.DBSelect2Command, codeColumn = this.codeColumn, textColumn = this.textColumn, ParameterChecks = this.ParameterChecks, DBSelectCommandParameters = this.DBSelectCommandParameters });
 
         }
         public void GenCustomControll(string Type)
         {
-
+            Template t=Template.Parse(System.IO.File.ReadAllText( PDAL.MapPath("~\\CustomPageParameter\\" + Type  +"\\View.html")));
+            CustomControllhtml=t.Render(Hash.FromAnonymousObject(new { PageParameter=this,Page=ParentPage}));
+            t = Template.Parse(System.IO.File.ReadAllText(PDAL.MapPath("~\\CustomPageParameter\\" + Type + "\\Valadate.js")));
+            CustomControllval = t.Render(Hash.FromAnonymousObject(new { PageParameter = this, Page = ParentPage }));
+            t = Template.Parse(System.IO.File.ReadAllText(PDAL.MapPath("~\\CustomPageParameter\\" + Type + "\\getvalue.js")));
+            CustomControllgetValue = t.Render(Hash.FromAnonymousObject(new { PageParameter = this, Page = ParentPage }));
+            t = Template.Parse(System.IO.File.ReadAllText(PDAL.MapPath("~\\CustomPageParameter\\" + Type + "\\setValue.js")));
+            CustomControllsetValue = t.Render(Hash.FromAnonymousObject(new { PageParameter = this, Page = ParentPage }));
+            t = Template.Parse(System.IO.File.ReadAllText(PDAL.MapPath("~\\CustomPageParameter\\" + Type + "\\initValue.js")));
+            CustomControllInitValue = t.Render(Hash.FromAnonymousObject(new { PageParameter = this, Page = ParentPage }));
 
         }
 

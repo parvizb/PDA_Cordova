@@ -1,0 +1,1 @@
+{{Page.Name}}{{PageParameter.name}}_value()
