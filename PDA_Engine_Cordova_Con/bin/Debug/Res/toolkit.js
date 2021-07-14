@@ -94,23 +94,39 @@
             
                 for (var k = 1; k < data[l][c].length; k++) {
                     var tcom = Com.DBCommand.substring(1);
+                    var pArr=new Array();
                     for (var k2 = 0; k2 < data[l][c][k].length; k2++) {
                        
                         tcom = AllReplace(tcom, "@" + data[l][c][k][k2].key, "'" + (data[l][c][k][k2].value === undefined ? '' : data[l][c][k][k2].value) + "'");
-
+                        pArr.push(data[l][c][k][k2]);
                     }
                     for (var zz = 0; zz < initValues.length; zz++) {
-                        console.log("zz:" + zz);
+                         
                         tcom = AllReplace(tcom, "@" + initValues[zz].key, "'" + (initValues[zz].value === undefined ? '' : initValues[zz].value) + "'");
-
+                       pArr(initValues[zz]);
 
                     }
+                    if(tcom.startsWith('$'))
+                    {
+                        eval( "tempfun=" + tcom.substr(1)  );
+                        tempfun( parameters, function(returnValue) {
+                            if(returnValue!=null)
+                            {
+                                ScallerValues[l]=returnValue;
+                             
+                            }
+                        } , function(){} ,  tx);
+
+                    }
+                    else
+                    {
                     tx.executeSql(tcom, [], function (tx, results) {
                         if (results.rows.length > 0) {
                             ScallerValues[l] = results.rows[0][0];
                         }
 
                     }, function () { });
+                   }
                 }
               
           
@@ -288,7 +304,7 @@ function PadLeft(v, len) {
 }
 
 var tempfun =null;
-function Scaller(command,parameters,fnOk,fnFail) {
+function Scaller(command,parameters,fnOk,fnFail ,trn) {
     if(command.startsWith("$"))
     {
        eval( "tempfun=" + command.substr(1)  );
@@ -300,6 +316,8 @@ function Scaller(command,parameters,fnOk,fnFail) {
         com = AllReplace(com, "@" + parameters[i].key, "'" + parameters[i].value + "'");
     }
     console.log(com);
+    if((trn==null) || (trn==undefined))
+    {
     db.transaction(function (tx) {
         tx.executeSql(com, [], function (tx, results) {
             var da = new Object(); da.Message = 'با موفقیت انجام شد'; da.code = 0;
@@ -315,8 +333,25 @@ function Scaller(command,parameters,fnOk,fnFail) {
             );
 
     });
+    }
+    else
+    {
+        trn.executeSql(com, [], function (trn, results) {
+            var da = new Object(); da.Message = 'با موفقیت انجام شد'; da.code = 0;
+            $('#loadingBar').hide();
+            da.retrunValue = null;
+            if (results.rows.length > 0) {
+                da.retrunValue = results.rows[0][0];
+
+            }
+            fnOk(da)
+        }, function (a, err) { $('#loadingBar').hide(); console.log(err.message); fnFail(a, err.message); }
+
+        );
+
+    }
 }
-function ReadTable(command, parameters, fnOk, fnFail) {
+function ReadTable(command, parameters, fnOk, fnFail,trn) {
  if(command.startsWith("$"))
  {
     eval( "tempfun=" + command.substr(1)  );
@@ -331,6 +366,8 @@ function ReadTable(command, parameters, fnOk, fnFail) {
         
         com = AllReplace(com, "@" + parameters[i].key, "'" + (parameters[i].value===undefined?"":parameters[i].value) + "'");
     }
+    if((trn==null) || (trn==undefined))
+    {
     db.transaction(function (tx) {
         tx.executeSql(com, [], function (tx, results) {
             var da = new Object(); da.Message = 'با موفقیت انجام شد'; da.code = 0;
@@ -349,6 +386,29 @@ function ReadTable(command, parameters, fnOk, fnFail) {
             );
 
     });
+  }
+  else
+  {
+    trn.executeSql(com, [], function (trn, results) {
+        var da = new Object(); da.Message = 'با موفقیت انجام شد'; da.code = 0;
+        $('#loadingBar').hide();
+        var ox=new Object();
+        ox.Records = new Array();
+        for (var i = 0; i < results.rows.length; i++) {
+
+            ox.Records.push(results.rows[i]);
+
+        }
+        da.retrunValue=JSON.stringify(ox);
+        fnOk(da)
+    }, function (a, err) { console.log(err.message); $('#loadingBar').hide(); fnFail(a, err.message); }
+
+        );
+
+      
+  }
+
+
 }
 function DBAction(pageName,method) {
         
