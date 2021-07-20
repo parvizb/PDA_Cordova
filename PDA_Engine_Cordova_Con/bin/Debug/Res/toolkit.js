@@ -1,4 +1,9 @@
 ﻿function DoBatch(data, Batch,FnOk,FnFail) {
+    var d = new Object();
+    d.code = 0;
+    d.returnValue = 0;
+    lastvalue=null;
+    d.Message = "با موفقیت ثبت شد";
     db.transaction(function (tx) {
         var ScallerValues = new Array();
         for (var l = 0; l < Batch.Commands.length; l++) {
@@ -8,9 +13,9 @@
             console.log("l:" + l);
             var Com = Batch.Commands[l];
             var initValues = new Array();
-            for (var j = 0; j < Com.Parameters; j++) {
+            for (var j = 0; j < Com.Parameters.length; j++) {
                 if (Com.Parameters[j].sourceType == 'ScallerValues') {
-                    initValues.push(toInput(Com.Parameters[j].name, intParse(ScallerValues[Com.Parameters[j].sourceTypeParameter])));
+                    initValues.push(toInput(Com.Parameters[j].name, parseInt(lastvalue)));
 
                 }
 
@@ -103,7 +108,7 @@
                     for (var zz = 0; zz < initValues.length; zz++) {
                          
                         tcom = AllReplace(tcom, "@" + initValues[zz].key, "'" + (initValues[zz].value === undefined ? '' : initValues[zz].value) + "'");
-                       pArr(initValues[zz]);
+                       pArr.push(initValues[zz]);
 
                     }
                     if(tcom.startsWith('$'))
@@ -112,8 +117,8 @@
                         tempfun( parameters, function(returnValue) {
                             if(returnValue!=null)
                             {
-                                ScallerValues[l]=returnValue;
-                             
+                               lastvalue=returnValue;
+                               console.log('l:' +lastvalue);
                             }
                         } , function(){} ,  tx);
 
@@ -122,10 +127,16 @@
                     {
                     tx.executeSql(tcom, [], function (tx, results) {
                         if (results.rows.length > 0) {
-                            ScallerValues[l] = results.rows[0][0];
+                            var ttt = results.rows[0][ Object.keys(results.rows[0])[0]];
+                            if(ttt!=null)
+                            {
+                                lastvalue=ttt;
+                            }
+
+                            console.log('l:' +lastvalue);
                         }
 
-                    }, function () { });
+                    }, function (x) { d.Message='خطایی رخ داد' + JSON.stringify(x) ; d.code=1;  });
                    }
                 }
               
@@ -136,10 +147,7 @@
 
         }
        
-        var d = new Object();
-        d.code = 0;
-        d.returnValue = 0;
-        d.Message = "با موفقیت ثبت شد";
+        
         FnOk(d);
         $('#loadingBar').hide();
 

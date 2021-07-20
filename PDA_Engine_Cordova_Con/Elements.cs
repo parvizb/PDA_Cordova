@@ -1244,7 +1244,16 @@ namespace PDA_Engine_Cordova_Con
                 }
 
             }
-
+            if (PagingCountCommand != "")
+            {
+                Util.InitCommanD(ref this.PagingCountCommand, PageParameters.toInputParameter(), null);
+                PagingCountCommand = PagingCountCommand.Substring(1);
+            }
+            Util.InitCommanD(ref this.DBCommand, PageParameters.toInputParameter(), null);
+            if (ValueDbCommand != "")
+            {
+                Util.InitCommanD(ref this.ValueDbCommand, ValueParameters.toInputParameter(), null);
+            }
         }
 
 
@@ -1293,11 +1302,8 @@ namespace PDA_Engine_Cordova_Con
 
 
 
-            Util.InitCommanD(ref this.DBCommand, PageParameters.toInputParameter(), null);
-            if (ValueDbCommand != "")
-            {
-                Util.InitCommanD(ref this.ValueDbCommand, ValueParameters.toInputParameter(), null);
-            }
+            
+           
             return Hash.FromAnonymousObject(new { CustomHtmls = this.CustomHtmls, Paging = this.Paging, PagingCountCommand = this.PagingCountCommand, SerachPrevValuesInBack = this.SerachPrevValuesInBack, HideDefaultButton = this.HideDefaultButton, isDailog = this.isDailog, ShowCond = this.ShowCond, SubmitBev = this.SubmitBev, SubmitBevParameter = this.SubmitBevParameter, Notes = this.Notes, MustSendFiles = this.MustSendFiles.ToString(), BatchCommands = this.BatchCommands, NoneFormParameters = this.NoneFormParameters.ToString(), JSStart = this.JSStart, HerSize = this.HerSize, ValSize = this.ValSize, Title = this.Title, id = this.id, link = this.link, ColumnCount = this.ColumnCount, PerKey = this.PerKey, type = this.type, DBCommand = this.DBCommand, name = this.name, queryString = this.queryString, ValueDbCommand = this.ValueDbCommand, PageParameters = this.PageParameters, Buttons = this.Buttons, tables = this.tables, ValueParameters = this.ValueParameters, CustomValidates = this.CustomValidates });
 
         }

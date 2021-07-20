@@ -436,8 +436,18 @@ TableViewAjax('getTableViewRecords',(dataP!==undefined?dataP: Entity),function(d
     {% if Page.SerachPrevValuesInBack =="Yes" -%}
     Dic['{{Page.title}}']= (dataP!=undefined?dataP: Entity);
     {% endif -%}
+    {% if Page.PagingCountCommand == ''-%}
     totalRecords= data.RecordTotal;
     GenPagingLinks();
+    {% else -%}
+    ReadTable("{{Page.PagingCountCommand}}",Entity.Parameters,function( dzz ){
+     var z=JSON.parse(dzz.retrunValue);
+     totalRecords= parseInt( z.Records[0][Object.keys(z.Records[0])[0]   ]);
+    GenPagingLinks();
+
+    } ,function(x){ totalRecords= data.RecordTotal  ;GenPagingLinks();})
+    {% endif -%}
+     
     {% for tab in  Page.tables -%}
     {% if tab.PoivtTable =='Yes' -%}
     currentScope.{{Page.name}}PoivtData = PovitTableMake( currentScope.{{Page.name}}records,'{{tab.PoivtRowColumn}}','{{tab.PoivtColumnName}}','{{tab.PoivtValueName}}');
