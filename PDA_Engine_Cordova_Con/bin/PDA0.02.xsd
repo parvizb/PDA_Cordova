@@ -10124,7 +10124,7 @@ zhihu
       </xs:enumeration>
       <xs:enumeration value="ScallerValues">
         <xs:annotation>
-          <xs:documentation>از خروجی یک دستور استفاده شود</xs:documentation>
+          <xs:documentation>از خروجی یک دستور استفاده شود فعلا پشتیانی نمی شود!!!:-( خیلی زور زدم </xs:documentation>
         </xs:annotation>
       </xs:enumeration>
       <xs:enumeration value="Expr">

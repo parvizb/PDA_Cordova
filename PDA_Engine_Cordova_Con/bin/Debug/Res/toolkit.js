@@ -1,7 +1,8 @@
-﻿function DoBatch(data, Batch,FnOk,FnFail) {
+﻿async function DoBatch(data, Batch,FnOk,FnFail) {
     var d = new Object();
     d.code = 0;
     d.returnValue = 0;
+    var buffed=false;
     lastvalue=null;
     d.Message = "با موفقیت ثبت شد";
     db.transaction(function (tx) {
@@ -113,6 +114,7 @@
                     }
                     if(tcom.startsWith('$'))
                     {
+                        buffed=true;
                         eval( "tempfun=" + tcom.substr(1)  );
                         tempfun( parameters, function(returnValue) {
                             if(returnValue!=null)
@@ -120,11 +122,12 @@
                                lastvalue=returnValue;
                                console.log('l:' +lastvalue);
                             }
-                        } , function(){} ,  tx);
+                        buffed=false; } , function(){ buffed=false;} ,  tx);
 
                     }
                     else
                     {
+                        buffed=true;
                     tx.executeSql(tcom, [], function (tx, results) {
                         if (results.rows.length > 0) {
                             var ttt = results.rows[0][ Object.keys(results.rows[0])[0]];
@@ -134,13 +137,22 @@
                             }
 
                             console.log('l:' +lastvalue);
+                            buffed=false;
                         }
 
-                    }, function (x) { d.Message='خطایی رخ داد' + JSON.stringify(x) ; d.code=1;  });
+                    }, function (x,y) { 
+                        
+                        buffed=false;;d.Message='خطایی رخ داد' + JSON.stringify(y) ; d.code=1;
+                      alert(JSON.stringify(y));
+                      
+                      FnFail(d);
+                      throw new Error('خطا : ' +  JSON.stringify(y));
+                      return ;
+                    });
                    }
                 }
               
-          
+              
 
             }
 
