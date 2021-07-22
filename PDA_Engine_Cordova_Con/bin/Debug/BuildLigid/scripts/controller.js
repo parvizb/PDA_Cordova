@@ -233,7 +233,7 @@ ScallerAjax('ScallerSubmit',Entity,function(data){
      
   
 
-
+    $('#loadingBar').hide();
     $(obj).attr('disabled',false);
     return;
        
@@ -431,7 +431,7 @@ SetDefaultValue(Entity.Parameters,'{{para.name}}',null);
 {% endfor -%}
 }
 TableViewAjax('getTableViewRecords',(dataP!==undefined?dataP: Entity),function(data){
-          
+    $('#loadingBar').hide();
     currentScope.{{Page.name}}records= data.records;
     {% if Page.SerachPrevValuesInBack =="Yes" -%}
     Dic['{{Page.title}}']= (dataP!=undefined?dataP: Entity);

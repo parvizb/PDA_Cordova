@@ -2,6 +2,8 @@
     var d = new Object();
     d.code = 0;
     d.returnValue = 0;
+    var exeList=new Array();
+    var exeIndex=new Array();
     var buffed=false;
     lastvalue=null;
     d.Message = "با موفقیت ثبت شد";
@@ -114,13 +116,15 @@
                     }
                     if(tcom.startsWith('$'))
                     {
+                        exeList.push(tcom);
+                        exeIndex.push(l);
                         buffed=true;
                         eval( "tempfun=" + tcom.substr(1)  );
                         tempfun( parameters, function(returnValue) {
                             if(returnValue!=null)
                             {
                                lastvalue=returnValue;
-                               console.log('l:' +lastvalue);
+                               exeIndex.indexOf()
                             }
                         buffed=false; } , function(){ buffed=false;} ,  tx);
 
